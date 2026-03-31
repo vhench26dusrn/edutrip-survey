@@ -8,11 +8,7 @@
 <title>EduTrip - 체험학습 만족도 조사</title>
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎒</text></svg>">
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
-
 <style>
-/* ═══════════════════════════════════════════ */
-/*  전체 기본 스타일                             */
-/* ═══════════════════════════════════════════ */
 :root {
   --primary: #1565C0;
   --primary-light: #42A5F5;
@@ -33,30 +29,22 @@
   --star: #FFB300;
   --student: #42A5F5;
   --teacher: #66BB6A;
+  --kinder: #FF7043;
   --radius: 16px;
   --shadow: 0 2px 12px rgba(0,0,0,0.08);
 }
-
 * { margin:0; padding:0; box-sizing:border-box; }
-
 body {
   font-family: 'Pretendard', -apple-system, 'Noto Sans KR', sans-serif;
-  background: var(--bg);
-  color: var(--text);
-  min-height: 100vh;
+  background: var(--bg); color: var(--text); min-height: 100vh;
   -webkit-font-smoothing: antialiased;
 }
-
-/* ═══ 공통 컴포넌트 ═══ */
 .page { display:none; min-height:100vh; padding-bottom:30px; }
 .page.active { display:block; animation: fadeIn 0.3s ease; }
-
 @keyframes fadeIn { from{opacity:0;transform:translateY(10px)} to{opacity:1;transform:translateY(0)} }
 @keyframes popIn { from{transform:scale(0.8);opacity:0} to{transform:scale(1);opacity:1} }
 @keyframes slideUp { from{transform:translateY(30px);opacity:0} to{transform:translateY(0);opacity:1} }
-
 .container { max-width:480px; margin:0 auto; padding:0 20px; }
-
 .btn {
   display:block; width:100%; padding:16px; border:none; border-radius:var(--radius);
   font-size:17px; font-weight:700; cursor:pointer; transition:all 0.2s;
@@ -68,58 +56,36 @@ body {
 .btn-secondary { background:var(--secondary); color:#fff; }
 .btn-ai { background:var(--ai); color:#fff; }
 .btn-outline { background:#fff; color:var(--primary); border:2px solid var(--primary); }
-
 .card {
   background:var(--surface); border-radius:var(--radius);
   box-shadow:var(--shadow); padding:20px; margin-bottom:16px;
 }
-
 .input-field {
   width:100%; padding:16px; border:2px solid var(--border); border-radius:12px;
-  font-size:16px; background:#F9FAFB; transition:border-color 0.2s;
-  font-family:inherit;
+  font-size:16px; background:#F9FAFB; transition:border-color 0.2s; font-family:inherit;
 }
 .input-field:focus { outline:none; border-color:var(--primary); background:#fff; }
-
-.badge {
-  display:inline-block; padding:4px 12px; border-radius:20px;
-  font-size:12px; font-weight:700;
-}
-
-/* ═══ 헤더 바 ═══ */
 .header-bar {
   background:var(--primary); color:#fff; padding:16px 20px;
   display:flex; align-items:center; gap:12px;
   position:sticky; top:0; z-index:100;
 }
 .header-bar h1 { font-size:18px; flex:1; }
-.header-bar .back-btn {
+.header-bar .back-btn, .header-bar .header-action {
   width:36px; height:36px; border-radius:50%; border:none;
   background:rgba(255,255,255,0.2); color:#fff; font-size:20px; cursor:pointer;
 }
-.header-bar .header-action {
-  width:36px; height:36px; border-radius:50%; border:none;
-  background:rgba(255,255,255,0.2); color:#fff; font-size:16px; cursor:pointer;
-}
-
-/* ═══════════════════════════════════════════ */
-/*  PAGE 1: 로그인 화면                         */
-/* ═══════════════════════════════════════════ */
 .login-page { background:linear-gradient(135deg, #E3F2FD 0%, #F3E5F5 100%); }
-
 .login-logo {
   width:120px; height:120px; margin:40px auto 0; border-radius:50%;
   background:#fff; display:flex; flex-direction:column;
   align-items:center; justify-content:center;
-  box-shadow:0 4px 20px rgba(21,101,192,0.2);
-  border:3px solid var(--primary);
+  box-shadow:0 4px 20px rgba(21,101,192,0.2); border:3px solid var(--primary);
 }
 .login-logo .emoji { font-size:48px; }
 .login-logo .logo-text { font-size:14px; font-weight:800; color:var(--primary); margin-top:2px; }
-
 .login-title { text-align:center; margin:20px 0 8px; font-size:24px; font-weight:800; }
 .login-subtitle { text-align:center; color:var(--text2); margin-bottom:32px; font-size:14px; }
-
 .role-selector { display:flex; gap:12px; margin:20px 0; }
 .role-btn {
   flex:1; padding:20px 12px; border-radius:var(--radius); border:2px solid var(--border);
@@ -135,25 +101,16 @@ body {
 }
 .role-btn .role-icon { font-size:36px; display:block; margin-bottom:8px; }
 .role-btn .role-label { font-size:16px; font-weight:700; }
-
-.grade-selector {
-  display:grid; grid-template-columns:repeat(3,1fr); gap:8px; margin:16px 0;
-}
+.grade-selector { display:grid; grid-template-columns:repeat(4,1fr); gap:8px; margin:16px 0; }
 .grade-btn {
-  padding:12px; border-radius:10px; border:2px solid var(--border);
-  background:#fff; cursor:pointer; text-align:center; font-size:15px;
+  padding:12px 4px; border-radius:10px; border:2px solid var(--border);
+  background:#fff; cursor:pointer; text-align:center; font-size:14px;
   font-weight:600; transition:all 0.2s;
 }
-.grade-btn.active {
-  background:var(--primary); color:#fff; border-color:var(--primary);
-}
-
-/* ═══════════════════════════════════════════ */
-/*  PAGE 2: 설문 목록                          */
-/* ═══════════════════════════════════════════ */
+.grade-btn.active { background:var(--primary); color:#fff; border-color:var(--primary); }
+.grade-btn.kinder.active { background:var(--kinder); color:#fff; border-color:var(--kinder); }
 .survey-item {
-  display:flex; align-items:center; gap:16px; padding:16px;
-  cursor:pointer; transition:transform 0.2s;
+  display:flex; align-items:center; gap:16px; padding:16px; cursor:pointer; transition:transform 0.2s;
 }
 .survey-item:active { transform:scale(0.98); }
 .survey-icon {
@@ -163,35 +120,28 @@ body {
 .survey-info { flex:1; }
 .survey-info h3 { font-size:16px; margin-bottom:4px; }
 .survey-info p { font-size:13px; color:var(--text2); }
-.survey-status { font-size:24px; }
-
-/* ═══════════════════════════════════════════ */
-/*  PAGE 3: 설문 응답                          */
-/* ═══════════════════════════════════════════ */
+.survey-info .grade-tags { display:flex; flex-wrap:wrap; gap:4px; margin-top:6px; }
+.survey-info .grade-tag {
+  display:inline-block; padding:2px 8px; border-radius:10px;
+  font-size:11px; font-weight:600; background:var(--primary-surface); color:var(--primary);
+}
+.survey-info .grade-tag.kinder { background:#FBE9E7; color:var(--kinder); }
 .survey-header {
   background:var(--secondary-surface); border:1px solid var(--secondary);
   border-radius:var(--radius); padding:16px; margin:16px 0; text-align:center;
 }
 .survey-header h2 { color:#2E7D32; font-size:18px; }
 .survey-header p { color:var(--secondary); font-size:13px; margin-top:4px; }
-
 .progress-wrap { margin:0 0 20px; }
-.progress-bar-bg {
-  height:10px; background:var(--border); border-radius:10px; overflow:hidden;
-}
-.progress-bar-fill {
-  height:100%; background:var(--secondary); border-radius:10px; transition:width 0.4s ease;
-}
+.progress-bar-bg { height:10px; background:var(--border); border-radius:10px; overflow:hidden; }
+.progress-bar-fill { height:100%; background:var(--secondary); border-radius:10px; transition:width 0.4s ease; }
 .progress-text { text-align:right; font-size:13px; color:var(--secondary); font-weight:700; margin-top:4px; }
-
 .question-area { min-height:340px; }
 .q-badge {
   display:inline-block; background:var(--primary); color:#fff;
   padding:4px 14px; border-radius:20px; font-size:13px; font-weight:700;
 }
 .q-text { font-size:22px; font-weight:800; line-height:1.5; margin:16px 0 28px; }
-
-/* 별점 */
 .stars { display:flex; justify-content:center; gap:8px; margin:10px 0; }
 .star-btn {
   width:56px; height:56px; font-size:42px; background:none; border:none;
@@ -199,32 +149,8 @@ body {
 }
 .star-btn:active { transform:scale(1.3); }
 .star-label {
-  text-align:center; margin-top:12px; font-size:16px; font-weight:700;
-  min-height:28px; transition:all 0.2s;
+  text-align:center; margin-top:12px; font-size:16px; font-weight:700; min-height:28px;
 }
-
-/* 객관식 */
-.choice-item {
-  padding:16px; border:2px solid var(--border); border-radius:12px;
-  margin-bottom:10px; cursor:pointer; transition:all 0.2s;
-  display:flex; align-items:center; gap:12px; font-size:16px;
-}
-.choice-item:hover { border-color:var(--primary-light); }
-.choice-item.selected {
-  background:var(--primary-surface); border-color:var(--primary);
-  font-weight:700; color:var(--primary);
-}
-.choice-radio {
-  width:22px; height:22px; border-radius:50%; border:2px solid var(--border);
-  display:flex; align-items:center; justify-content:center; flex-shrink:0;
-}
-.choice-item.selected .choice-radio {
-  border-color:var(--primary); background:var(--primary);
-}
-.choice-item.selected .choice-radio::after {
-  content:''; width:8px; height:8px; border-radius:50%; background:#fff;
-}
-
 .text-area {
   width:100%; min-height:120px; padding:16px; border:2px solid var(--border);
   border-radius:12px; font-size:16px; font-family:inherit; resize:vertical;
@@ -232,56 +158,48 @@ body {
 }
 .text-area:focus { outline:none; border-color:var(--primary); background:#fff; }
 .char-count { text-align:right; font-size:12px; color:var(--text2); margin-top:4px; }
-
 .nav-buttons { display:flex; gap:12px; margin-top:24px; padding-bottom:20px; }
 .nav-buttons .btn { flex:1; }
-
-/* ═══════════════════════════════════════════ */
-/*  PAGE 4: 완료 화면                          */
-/* ═══════════════════════════════════════════ */
 .complete-page { display:flex; flex-direction:column; align-items:center; justify-content:center; }
 .complete-icon { font-size:100px; animation:popIn 0.5s ease; }
 .complete-title { font-size:28px; font-weight:800; margin:20px 0 8px; }
 .complete-desc { color:var(--text2); font-size:15px; text-align:center; line-height:1.6; }
-
-/* ═══════════════════════════════════════════ */
-/*  PAGE 5: 대시보드                           */
-/* ═══════════════════════════════════════════ */
 .stat-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:10px; margin:16px 0; }
 .stat-box {
-  background:#fff; border-radius:14px; padding:14px 8px; text-align:center;
-  box-shadow:var(--shadow);
+  background:#fff; border-radius:14px; padding:14px 8px; text-align:center; box-shadow:var(--shadow);
 }
 .stat-value { font-size:26px; font-weight:800; }
 .stat-label { font-size:11px; color:var(--text2); margin-top:4px; }
-
 .chart-wrap { background:#fff; border-radius:var(--radius); padding:16px; box-shadow:var(--shadow); margin-bottom:16px; }
 .chart-wrap h3 { font-size:16px; margin-bottom:12px; }
-
 .sentiment-bar { display:flex; border-radius:8px; overflow:hidden; height:14px; margin:12px 0; }
 .sentiment-bar > div { transition:width 0.5s ease; }
-
 .sentiment-labels { display:flex; justify-content:space-around; }
-.sentiment-labels > div { text-align:center; }
 .sentiment-labels .s-value { font-size:20px; font-weight:800; }
 .sentiment-labels .s-label { font-size:11px; color:var(--text2); }
-
-.response-list { margin-top:16px; }
 .response-item {
   background:#F9FAFB; border-radius:12px; padding:14px; margin-bottom:10px;
   border-left:4px solid var(--primary);
 }
+.response-item.teacher-resp { border-left-color:var(--teacher); }
 .response-item .r-meta { font-size:12px; color:var(--text2); margin-bottom:6px; }
+.response-item .r-role-badge {
+  display:inline-block; padding:1px 8px; border-radius:8px; font-size:10px; font-weight:700; margin-left:4px;
+}
 .response-item .r-scores { display:flex; flex-wrap:wrap; gap:6px; margin-bottom:8px; }
-.response-item .r-scores .r-score {
+.response-item .r-score {
   background:var(--primary-surface); color:var(--primary); padding:2px 8px;
   border-radius:6px; font-size:12px; font-weight:600;
 }
 .response-item .r-text { font-size:13px; color:var(--text); line-height:1.5; }
-
-/* ═══════════════════════════════════════════ */
-/*  PAGE 6: AI 리포트                          */
-/* ═══════════════════════════════════════════ */
+.tab-bar {
+  display:flex; background:#fff; border-radius:12px; padding:4px; margin:16px 0; box-shadow:var(--shadow);
+}
+.tab-btn {
+  flex:1; padding:10px; border:none; background:none; border-radius:10px;
+  font-size:14px; font-weight:600; cursor:pointer; transition:all 0.2s; color:var(--text2);
+}
+.tab-btn.active { background:var(--primary); color:#fff; }
 .report-header {
   background:var(--ai-surface); border:2px solid var(--ai); border-radius:var(--radius);
   padding:24px; text-align:center; margin:16px 0;
@@ -289,16 +207,14 @@ body {
 .report-header .rh-icon { font-size:40px; }
 .report-header h2 { color:var(--ai); font-size:20px; margin:8px 0 4px; }
 .report-header p { color:var(--text2); font-size:13px; }
-
 .insight-card {
   border-radius:var(--radius); padding:20px; margin-bottom:14px;
   border-left:5px solid; animation:slideUp 0.4s ease both;
 }
-.insight-card:nth-child(1) { animation-delay:0.1s; }
-.insight-card:nth-child(2) { animation-delay:0.2s; }
-.insight-card:nth-child(3) { animation-delay:0.3s; }
-.insight-card:nth-child(4) { animation-delay:0.4s; }
-
+.insight-card:nth-child(1){animation-delay:0.1s}
+.insight-card:nth-child(2){animation-delay:0.2s}
+.insight-card:nth-child(3){animation-delay:0.3s}
+.insight-card:nth-child(4){animation-delay:0.4s}
 .insight-card h3 { font-size:16px; margin-bottom:12px; display:flex; align-items:center; gap:8px; }
 .insight-card ul { list-style:none; padding:0; }
 .insight-card li {
@@ -307,71 +223,14 @@ body {
 }
 .insight-card li:last-child { border-bottom:none; }
 .insight-card li::before { content:'•'; position:absolute; left:0; font-weight:700; }
-
 .ic-primary { background:var(--primary-surface); border-color:var(--primary); }
-.ic-primary h3 { color:var(--primary); }
-.ic-primary li::before { color:var(--primary); }
-
+.ic-primary h3 { color:var(--primary); } .ic-primary li::before { color:var(--primary); }
 .ic-success { background:var(--secondary-surface); border-color:var(--secondary); }
-.ic-success h3 { color:var(--secondary); }
-.ic-success li::before { color:var(--secondary); }
-
+.ic-success h3 { color:var(--secondary); } .ic-success li::before { color:var(--secondary); }
 .ic-danger { background:var(--error-surface); border-color:var(--error); }
-.ic-danger h3 { color:var(--error); }
-.ic-danger li::before { color:var(--error); }
-
+.ic-danger h3 { color:var(--error); } .ic-danger li::before { color:var(--error); }
 .ic-warning { background:var(--accent-surface); border-color:var(--accent); }
-.ic-warning h3 { color:var(--accent); }
-.ic-warning li::before { color:var(--accent); }
-
-/* ═══ 교사 설정 패널 ═══ */
-.settings-panel {
-  background:#fff; border-radius:var(--radius); padding:20px; margin:16px 0;
-  box-shadow:var(--shadow);
-}
-.settings-panel h3 { font-size:16px; margin-bottom:16px; color:var(--primary); }
-.setting-row { margin-bottom:14px; }
-.setting-row label { display:block; font-size:13px; color:var(--text2); margin-bottom:6px; font-weight:600; }
-
-.tab-bar {
-  display:flex; background:#fff; border-radius:12px; padding:4px; margin:16px 0;
-  box-shadow:var(--shadow);
-}
-.tab-btn {
-  flex:1; padding:10px; border:none; background:none; border-radius:10px;
-  font-size:14px; font-weight:600; cursor:pointer; transition:all 0.2s;
-  color:var(--text2);
-}
-.tab-btn.active { background:var(--primary); color:#fff; }
-
-/* ═══ 반응형 ═══ */
-@media (max-width:360px) {
-  .q-text { font-size:19px; }
-  .star-btn { width:48px; height:48px; font-size:36px; }
-  .stat-grid { grid-template-columns:repeat(3,1fr); gap:6px; }
-  .stat-value { font-size:20px; }
-}
-
-/* ═══ 로딩 ═══ */
-.loading-overlay {
-  position:fixed; top:0; left:0; right:0; bottom:0; background:rgba(0,0,0,0.5);
-  display:flex; align-items:center; justify-content:center; z-index:1000;
-}
-.loading-spinner {
-  background:#fff; border-radius:20px; padding:32px 40px; text-align:center;
-}
-.spinner { font-size:40px; animation:spin 1s linear infinite; display:inline-block; }
-@keyframes spin { to{transform:rotate(360deg)} }
-
-/* ═══ 토스트 ═══ */
-.toast {
-  position:fixed; bottom:30px; left:50%; transform:translateX(-50%);
-  background:#333; color:#fff; padding:12px 24px; border-radius:30px;
-  font-size:14px; z-index:2000; animation:slideUp 0.3s ease;
-  white-space:nowrap;
-}
-
-/* ═══ 관리자 모달 ═══ */
+.ic-warning h3 { color:var(--accent); } .ic-warning li::before { color:var(--accent); }
 .modal-overlay {
   position:fixed; top:0; left:0; right:0; bottom:0;
   background:rgba(0,0,0,0.5); z-index:500; display:flex;
@@ -379,16 +238,40 @@ body {
 }
 .modal-content {
   background:#fff; border-radius:20px 20px 0 0; padding:24px; width:100%;
-  max-width:480px; max-height:80vh; overflow-y:auto; animation:slideUp 0.3s ease;
+  max-width:480px; max-height:85vh; overflow-y:auto; animation:slideUp 0.3s ease;
 }
 .modal-content h2 { font-size:20px; margin-bottom:16px; }
+.setting-row { margin-bottom:14px; }
+.setting-row label { display:block; font-size:13px; color:var(--text2); margin-bottom:6px; font-weight:600; }
+.grade-check-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:8px; }
+.grade-check {
+  padding:10px 4px; border-radius:10px; border:2px solid var(--border);
+  background:#fff; cursor:pointer; text-align:center; font-size:13px;
+  font-weight:600; transition:all 0.2s; user-select:none;
+}
+.grade-check.checked { background:var(--primary); color:#fff; border-color:var(--primary); }
+.grade-check.checked.kinder { background:var(--kinder); border-color:var(--kinder); }
+.toast {
+  position:fixed; bottom:30px; left:50%; transform:translateX(-50%);
+  background:#333; color:#fff; padding:12px 24px; border-radius:30px;
+  font-size:14px; z-index:2000; animation:slideUp 0.3s ease; white-space:nowrap;
+}
+.teacher-q-section {
+  margin-top:16px; padding:16px; background:var(--secondary-surface);
+  border:1px solid var(--secondary); border-radius:12px;
+}
+.teacher-q-section h4 { color:#2E7D32; font-size:14px; margin-bottom:8px; }
+@media (max-width:360px) {
+  .q-text { font-size:19px; }
+  .star-btn { width:48px; height:48px; font-size:36px; }
+  .stat-value { font-size:20px; }
+  .grade-selector, .grade-check-grid { grid-template-columns:repeat(3,1fr); }
+}
 </style>
 </head>
 <body>
 
-<!-- ═══════════════════════════════════════════════════════ -->
-<!-- PAGE 1: 로그인                                         -->
-<!-- ═══════════════════════════════════════════════════════ -->
+<!-- ═══ PAGE 1: 로그인 ═══ -->
 <div id="page-login" class="page login-page active">
   <div class="container">
     <div class="login-logo">
@@ -397,7 +280,6 @@ body {
     </div>
     <h1 class="login-title">체험학습 만족도 조사</h1>
     <p class="login-subtitle">학교 코드를 입력하고 역할을 선택하세요</p>
-
     <div class="card">
       <div style="margin-bottom:14px">
         <label style="font-size:13px;font-weight:600;color:var(--text2);display:block;margin-bottom:6px">학교 코드</label>
@@ -407,7 +289,6 @@ body {
         <label style="font-size:13px;font-weight:600;color:var(--text2);display:block;margin-bottom:6px">이름</label>
         <input id="userName" class="input-field" placeholder="홍길동">
       </div>
-
       <label style="font-size:13px;font-weight:600;color:var(--text2);display:block;margin-bottom:8px">역할 선택</label>
       <div class="role-selector">
         <div class="role-btn active-student" id="roleStudent" onclick="selectRole('student')">
@@ -416,28 +297,20 @@ body {
         </div>
         <div class="role-btn" id="roleTeacher" onclick="selectRole('teacher')">
           <span class="role-icon">👩‍🏫</span>
-          <span class="role-label">교사</span>
+          <span class="role-label">인솔교사</span>
         </div>
       </div>
-
       <div id="gradeArea">
         <label style="font-size:13px;font-weight:600;color:var(--text2);display:block;margin-bottom:8px">학년 선택</label>
         <div class="grade-selector" id="gradeSelector"></div>
       </div>
     </div>
-
-    <button class="btn btn-primary" onclick="handleLogin()" style="margin-top:8px">
-      로그인
-    </button>
-    <p style="text-align:center;margin-top:16px;font-size:12px;color:var(--text2)">
-      * 개인정보는 기기에만 저장되며 외부로 전송되지 않습니다
-    </p>
+    <button class="btn btn-primary" onclick="handleLogin()" style="margin-top:8px">로그인</button>
+    <p style="text-align:center;margin-top:16px;font-size:12px;color:var(--text2)">* 개인정보는 기기에만 저장되며 외부로 전송되지 않습니다</p>
   </div>
 </div>
 
-<!-- ═══════════════════════════════════════════════════════ -->
-<!-- PAGE 2: 설문 목록 (교사: 관리 / 학생: 응답)              -->
-<!-- ═══════════════════════════════════════════════════════ -->
+<!-- ═══ PAGE 2: 설문 목록 ═══ -->
 <div id="page-list" class="page">
   <div class="header-bar">
     <h1 id="listTitle">설문 목록</h1>
@@ -448,44 +321,33 @@ body {
       <span style="font-size:24px" id="userEmoji">🧑‍🎓</span>
       <div>
         <div style="font-weight:700;font-size:15px" id="userDisplay">홍길동</div>
-        <div style="font-size:12px;color:var(--text2)" id="userMeta">SEOUL-001 | 학생 | 5학년</div>
+        <div style="font-size:12px;color:var(--text2)" id="userMeta"></div>
       </div>
     </div>
-
-    <!-- 교사 전용: 설문 추가 -->
     <div id="teacherControls" style="display:none;margin-top:16px">
-      <button class="btn btn-outline" onclick="showAddSurvey()" style="font-size:15px;padding:12px">
-        ➕ 새 체험학습 설문 만들기
-      </button>
+      <button class="btn btn-outline" onclick="showAddSurvey()" style="font-size:15px;padding:12px">➕ 새 체험학습 설문 만들기</button>
     </div>
-
     <div id="surveyList" style="margin-top:16px"></div>
   </div>
 </div>
 
-<!-- ═══════════════════════════════════════════════════════ -->
-<!-- PAGE 3: 설문 응답                                      -->
-<!-- ═══════════════════════════════════════════════════════ -->
+<!-- ═══ PAGE 3: 설문 응답 ═══ -->
 <div id="page-survey" class="page">
   <div class="header-bar">
     <button class="back-btn" onclick="showExitConfirm()">←</button>
     <h1>설문 응답</h1>
+    <span id="surveyRoleBadge" style="font-size:12px;background:rgba(255,255,255,0.25);padding:3px 10px;border-radius:12px"></span>
   </div>
   <div class="container">
     <div class="survey-header">
-      <h2 id="surveyTitle">자연생태공원 체험학습</h2>
-      <p id="surveyMeta">2026.03.25 실시 | 총 7문항</p>
+      <h2 id="surveyTitle"></h2>
+      <p id="surveyMeta"></p>
     </div>
-
     <div class="progress-wrap">
-      <div class="progress-bar-bg">
-        <div class="progress-bar-fill" id="progressFill" style="width:0%"></div>
-      </div>
+      <div class="progress-bar-bg"><div class="progress-bar-fill" id="progressFill" style="width:0%"></div></div>
       <div class="progress-text" id="progressText">0 / 7</div>
     </div>
-
     <div class="question-area" id="questionArea"></div>
-
     <div class="nav-buttons">
       <button class="btn btn-outline" id="prevBtn" onclick="prevQuestion()" style="display:none">← 이전</button>
       <button class="btn btn-secondary" id="nextBtn" onclick="nextQuestion()">다음 →</button>
@@ -493,23 +355,17 @@ body {
   </div>
 </div>
 
-<!-- ═══════════════════════════════════════════════════════ -->
-<!-- PAGE 4: 완료                                          -->
-<!-- ═══════════════════════════════════════════════════════ -->
+<!-- ═══ PAGE 4: 완료 ═══ -->
 <div id="page-complete" class="page complete-page">
   <div class="container" style="text-align:center;padding-top:80px">
     <div class="complete-icon">🎉</div>
     <h1 class="complete-title">응답 완료!</h1>
     <p class="complete-desc">소중한 의견 감사합니다.<br>더 나은 체험학습을 위해 반영하겠습니다.</p>
-    <div style="margin-top:40px">
-      <button class="btn btn-primary" onclick="goToList()">목록으로 돌아가기</button>
-    </div>
+    <div style="margin-top:40px"><button class="btn btn-primary" onclick="goToList()">목록으로 돌아가기</button></div>
   </div>
 </div>
 
-<!-- ═══════════════════════════════════════════════════════ -->
-<!-- PAGE 5: 대시보드 (교사용)                               -->
-<!-- ═══════════════════════════════════════════════════════ -->
+<!-- ═══ PAGE 5: 대시보드 ═══ -->
 <div id="page-dashboard" class="page">
   <div class="header-bar" style="background:var(--primary)">
     <button class="back-btn" onclick="goToList()">←</button>
@@ -517,62 +373,32 @@ body {
     <button class="header-action" onclick="goToReport()">📋</button>
   </div>
   <div class="container">
-    <div class="stat-grid" style="margin-top:16px">
-      <div class="stat-box">
-        <div class="stat-value" style="color:var(--primary)" id="statTotal">0</div>
-        <div class="stat-label">전체 응답</div>
-      </div>
-      <div class="stat-box">
-        <div class="stat-value" style="color:var(--secondary)" id="statAvg">0</div>
-        <div class="stat-label">평균 점수</div>
-      </div>
-      <div class="stat-box">
-        <div class="stat-value" style="color:var(--accent)" id="statRate">0%</div>
-        <div class="stat-label">긍정 비율</div>
-      </div>
+    <div id="dashSurveyInfo" style="margin-top:12px;text-align:center;font-size:13px;color:var(--text2)"></div>
+    <div class="stat-grid" style="margin-top:12px">
+      <div class="stat-box"><div class="stat-value" style="color:var(--primary)" id="statTotal">0</div><div class="stat-label">전체 응답</div></div>
+      <div class="stat-box"><div class="stat-value" style="color:var(--secondary)" id="statAvg">0</div><div class="stat-label">평균 점수</div></div>
+      <div class="stat-box"><div class="stat-value" style="color:var(--accent)" id="statRate">0%</div><div class="stat-label">긍정 비율</div></div>
     </div>
-
-    <div class="chart-wrap">
-      <h3>📊 항목별 만족도 점수</h3>
-      <canvas id="barChart" height="220"></canvas>
+    <div class="stat-grid" style="margin-top:0">
+      <div class="stat-box"><div class="stat-value" style="color:var(--student);font-size:20px" id="statStudents">0</div><div class="stat-label">학생 응답</div></div>
+      <div class="stat-box"><div class="stat-value" style="color:var(--teacher);font-size:20px" id="statTeachers">0</div><div class="stat-label">교사 응답</div></div>
+      <div class="stat-box"><div class="stat-value" style="color:var(--kinder);font-size:20px" id="statKinder">0</div><div class="stat-label">유치원 응답</div></div>
     </div>
-
-    <div class="chart-wrap">
-      <h3>😊 감성 분석 결과</h3>
-      <div class="sentiment-bar" id="sentimentBar"></div>
-      <div class="sentiment-labels" id="sentimentLabels"></div>
-    </div>
-
-    <div class="chart-wrap">
-      <h3>📈 역할별 비교 (학생 vs 교사)</h3>
-      <canvas id="radarChart" height="260"></canvas>
-    </div>
-
+    <div class="chart-wrap"><h3>📊 항목별 만족도 점수</h3><canvas id="barChart" height="220"></canvas></div>
+    <div class="chart-wrap"><h3>😊 감성 분석 결과</h3><div class="sentiment-bar" id="sentimentBar"></div><div class="sentiment-labels" id="sentimentLabels"></div></div>
+    <div class="chart-wrap"><h3>📈 역할별 비교</h3><canvas id="radarChart" height="260"></canvas></div>
     <div class="tab-bar">
       <button class="tab-btn active" onclick="showTab(this,'tabTexts')">주관식 응답</button>
       <button class="tab-btn" onclick="showTab(this,'tabAll')">전체 응답</button>
     </div>
-
     <div id="tabTexts" class="response-list"></div>
     <div id="tabAll" class="response-list" style="display:none"></div>
-
-    <div style="margin-top:16px">
-      <button class="btn btn-ai" onclick="goToReport()">
-        ✨ AI 교육적 시사점 보기
-      </button>
-    </div>
-
-    <div style="margin-top:10px">
-      <button class="btn btn-outline" onclick="exportCSV()" style="font-size:14px;padding:12px">
-        📥 응답 데이터 CSV 다운로드
-      </button>
-    </div>
+    <div style="margin-top:16px"><button class="btn btn-ai" onclick="goToReport()">✨ AI 교육적 시사점 보기</button></div>
+    <div style="margin-top:10px"><button class="btn btn-outline" onclick="exportCSV()" style="font-size:14px;padding:12px">📥 응답 데이터 CSV 다운로드</button></div>
   </div>
 </div>
 
-<!-- ═══════════════════════════════════════════════════════ -->
-<!-- PAGE 6: AI 리포트                                      -->
-<!-- ═══════════════════════════════════════════════════════ -->
+<!-- ═══ PAGE 6: AI 리포트 ═══ -->
 <div id="page-report" class="page">
   <div class="header-bar" style="background:var(--ai)">
     <button class="back-btn" onclick="goToDashboard()">←</button>
@@ -583,31 +409,22 @@ body {
     <div class="report-header">
       <div class="rh-icon">🤖</div>
       <h2>AI 교육적 시사점 리포트</h2>
-      <p id="reportMeta">분석 대상 정보</p>
+      <p id="reportMeta"></p>
     </div>
-
     <div id="reportContent"></div>
-
     <div style="display:flex;gap:12px;margin-top:20px;padding-bottom:20px">
-      <button class="btn btn-ai" onclick="copyReport()" style="flex:1;font-size:15px">
-        📋 리포트 복사
-      </button>
-      <button class="btn btn-outline" onclick="printReport()" style="flex:1;font-size:15px;color:var(--ai);border-color:var(--ai)">
-        🖨️ 인쇄하기
-      </button>
+      <button class="btn btn-ai" onclick="copyReport()" style="flex:1;font-size:15px">📋 리포트 복사</button>
+      <button class="btn btn-outline" onclick="printReport()" style="flex:1;font-size:15px;color:var(--ai);border-color:var(--ai)">🖨️ 인쇄하기</button>
     </div>
   </div>
 </div>
 
-
-<!-- ═══════════════════════════════════════════════════════ -->
-<!-- 모달: 설문 추가                                        -->
-<!-- ═══════════════════════════════════════════════════════ -->
+<!-- ═══ 모달: 설문 추가 ═══ -->
 <div id="addSurveyModal" class="modal-overlay" style="display:none" onclick="closeModalOutside(event)">
   <div class="modal-content" onclick="event.stopPropagation()">
     <h2>📝 새 체험학습 설문</h2>
     <div class="setting-row">
-      <label>체험학습 이름</label>
+      <label>체험학습 이름 *</label>
       <input id="newTitle" class="input-field" placeholder="예: 자연생태공원 체험학습">
     </div>
     <div class="setting-row">
@@ -618,6 +435,22 @@ body {
       <label>체험 날짜</label>
       <input id="newDate" class="input-field" type="date">
     </div>
+    <div class="setting-row">
+      <label>실시 학년 선택 (복수 선택 가능) *</label>
+      <div class="grade-check-grid" id="gradeCheckGrid"></div>
+      <div style="margin-top:8px;display:flex;gap:8px">
+        <button onclick="gradeCheckAll()" style="flex:1;padding:8px;border:1px solid var(--border);border-radius:8px;background:#fff;font-size:13px;cursor:pointer;font-weight:600">전체 선택</button>
+        <button onclick="gradeCheckNone()" style="flex:1;padding:8px;border:1px solid var(--border);border-radius:8px;background:#fff;font-size:13px;cursor:pointer;font-weight:600">전체 해제</button>
+      </div>
+    </div>
+    <div class="setting-row">
+      <label>인솔교사 설문 참여</label>
+      <div style="display:flex;gap:12px">
+        <div class="grade-check checked" id="teacherSurveyYes" onclick="setTeacherSurvey(true)" style="flex:1">참여함 ✅</div>
+        <div class="grade-check" id="teacherSurveyNo" onclick="setTeacherSurvey(false)" style="flex:1">참여안함</div>
+      </div>
+      <p style="font-size:11px;color:var(--text2);margin-top:6px">* 인솔교사도 만족도 설문에 응답할 수 있습니다</p>
+    </div>
     <div style="display:flex;gap:12px;margin-top:20px">
       <button class="btn btn-outline" onclick="closeModal()" style="flex:1">취소</button>
       <button class="btn btn-primary" onclick="addSurvey()" style="flex:1">만들기</button>
@@ -626,19 +459,17 @@ body {
 </div>
 
 <script>
-/* ═══════════════════════════════════════════════════════════ */
-/*  앱 상태 관리                                               */
-/* ═══════════════════════════════════════════════════════════ */
-let APP = {
-  user: null,             // { name, role, grade, schoolCode }
-  currentSurveyId: null,
-  currentQ: 0,
-  answers: {},
-  startTime: null,
-};
+/* ═══ 앱 상태 ═══ */
+let APP = { user:null, currentSurveyId:null, currentQ:0, answers:{}, startTime:null };
 
-// 기본 설문 문항
-const DEFAULT_QUESTIONS = [
+const GRADE_OPTIONS = [
+  { value:'K', label:'유치원', isKinder:true },
+  { value:'1', label:'1학년' }, { value:'2', label:'2학년' },
+  { value:'3', label:'3학년' }, { value:'4', label:'4학년' },
+  { value:'5', label:'5학년' }, { value:'6', label:'6학년' },
+];
+
+const STUDENT_QUESTIONS = [
   { id:'q1', text:'체험 프로그램의 전반적 만족도는?', type:'star', category:'프로그램' },
   { id:'q2', text:'안전 관리가 잘 되었나요?', type:'star', category:'안전관리' },
   { id:'q3', text:'이동 및 편의시설은 어떠했나요?', type:'star', category:'이동편의' },
@@ -648,588 +479,533 @@ const DEFAULT_QUESTIONS = [
   { id:'q7', text:'개선되었으면 하는 점을 알려주세요.', type:'text_long', category:'개선사항' },
 ];
 
-/* ═══════════════════════════════════════════════════════════ */
-/*  데이터 저장소 (localStorage)                               */
-/* ═══════════════════════════════════════════════════════════ */
-function getData(key, def) {
-  try { return JSON.parse(localStorage.getItem(key)) || def; }
-  catch { return def; }
-}
-function setData(key, val) { localStorage.setItem(key, JSON.stringify(val)); }
+const TEACHER_QUESTIONS = [
+  { id:'q1', text:'체험 프로그램의 전반적 만족도는?', type:'star', category:'프로그램' },
+  { id:'q2', text:'안전 관리가 잘 되었나요?', type:'star', category:'안전관리' },
+  { id:'q3', text:'이동 및 편의시설은 어떠했나요?', type:'star', category:'이동편의' },
+  { id:'q4', text:'학습에 도움이 되었나요?', type:'star', category:'교육효과' },
+  { id:'q5', text:'다시 참여하고 싶나요?', type:'star', category:'재참여' },
+  { id:'tq1', text:'교육과정과의 연계성은 적합했나요?', type:'star', category:'교육연계' },
+  { id:'tq2', text:'학생들의 참여도와 흥미는 어떠했나요?', type:'star', category:'학생참여' },
+  { id:'tq3', text:'체험학습 운영 기관의 협조 수준은?', type:'star', category:'기관협조' },
+  { id:'q6', text:'인솔교사로서 가장 좋았던 점은?', type:'text_short', category:'기억활동' },
+  { id:'q7', text:'운영 개선이 필요한 사항을 알려주세요.', type:'text_long', category:'개선사항' },
+];
 
-function getSurveys() { return getData('surveys', []); }
-function setSurveys(s) { setData('surveys', s); }
+/* ═══ 데이터 저장소 ═══ */
+function getData(k,d){try{return JSON.parse(localStorage.getItem(k))||d}catch{return d}}
+function setData(k,v){localStorage.setItem(k,JSON.stringify(v))}
+function getSurveys(){return getData('surveys',[])}
+function setSurveys(s){setData('surveys',s)}
+function getResponses(){return getData('responses',[])}
+function setResponses(r){setData('responses',r)}
 
-function getResponses() { return getData('responses', []); }
-function setResponses(r) { setData('responses', r); }
-
-/* ═══════════════════════════════════════════════════════════ */
-/*  페이지 전환                                                */
-/* ═══════════════════════════════════════════════════════════ */
-function showPage(id) {
-  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+/* ═══ 페이지 전환 ═══ */
+function showPage(id){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
   document.getElementById('page-'+id).classList.add('active');
-  window.scrollTo(0, 0);
+  window.scrollTo(0,0);
 }
 
-/* ═══════════════════════════════════════════════════════════ */
-/*  로그인 화면                                                */
-/* ═══════════════════════════════════════════════════════════ */
-let selectedRole = 'student';
-let selectedGrade = 5;
+/* ═══ 로그인 ═══ */
+let selectedRole='student', selectedGrade='5';
 
-function selectRole(role) {
-  selectedRole = role;
-  document.getElementById('roleStudent').className = 'role-btn' + (role==='student'?' active-student':'');
-  document.getElementById('roleTeacher').className = 'role-btn' + (role==='teacher'?' active-teacher':'');
-  document.getElementById('gradeArea').style.display = role==='student'?'block':'none';
+function selectRole(role){
+  selectedRole=role;
+  document.getElementById('roleStudent').className='role-btn'+(role==='student'?' active-student':'');
+  document.getElementById('roleTeacher').className='role-btn'+(role==='teacher'?' active-teacher':'');
+  document.getElementById('gradeArea').style.display=role==='student'?'block':'none';
 }
 
-function renderGrades() {
-  const el = document.getElementById('gradeSelector');
-  el.innerHTML = '';
-  for (let i=1;i<=6;i++) {
-    el.innerHTML += '<div class="grade-btn'+(i===selectedGrade?' active':'')+'" onclick="selectGrade('+i+')">'+i+'학년</div>';
-  }
+function renderGrades(){
+  const el=document.getElementById('gradeSelector');
+  el.innerHTML='';
+  GRADE_OPTIONS.forEach(g=>{
+    const isActive=selectedGrade===g.value;
+    const kClass=g.isKinder?' kinder':'';
+    el.innerHTML+='<div class="grade-btn'+kClass+(isActive?' active':'')+'" onclick="selectGrade(''+g.value+'')">'+g.label+'</div>';
+  });
 }
-function selectGrade(g) { selectedGrade=g; renderGrades(); }
+function selectGrade(g){selectedGrade=g;renderGrades()}
 
-function handleLogin() {
-  const code = document.getElementById('schoolCode').value.trim().toUpperCase();
-  const name = document.getElementById('userName').value.trim();
-  if (!code || !name) { showToast('학교 코드와 이름을 입력하세요'); return; }
-
-  APP.user = { name, role: selectedRole, grade: selectedRole==='student'?selectedGrade:null, schoolCode: code };
-  setData('currentUser', APP.user);
+function handleLogin(){
+  const code=document.getElementById('schoolCode').value.trim().toUpperCase();
+  const name=document.getElementById('userName').value.trim();
+  if(!code||!name){showToast('학교 코드와 이름을 입력하세요');return}
+  APP.user={name,role:selectedRole,grade:selectedRole==='student'?selectedGrade:null,schoolCode:code};
+  setData('currentUser',APP.user);
   initSampleData(code);
   goToList();
 }
+function handleLogout(){if(confirm('로그아웃 하시겠습니까?')){APP.user=null;localStorage.removeItem('currentUser');showPage('login')}}
 
-function handleLogout() {
-  if (confirm('로그아웃 하시겠습니까?')) {
-    APP.user = null;
-    localStorage.removeItem('currentUser');
-    showPage('login');
-  }
-}
-
-/* ═══════════════════════════════════════════════════════════ */
-/*  샘플 데이터 초기화                                         */
-/* ═══════════════════════════════════════════════════════════ */
-function initSampleData(code) {
-  let surveys = getSurveys();
-  if (surveys.length === 0) {
-    surveys = [
-      { id:'s1', title:'자연생태공원 체험학습', destination:'서울숲 생태공원', date:'2026-03-25', schoolCode:code, status:'active' },
-      { id:'s2', title:'역사문화 탐방', destination:'경복궁·국립민속박물관', date:'2026-03-20', schoolCode:code, status:'active' },
+/* ═══ 샘플 데이터 ═══ */
+function initSampleData(code){
+  let surveys=getSurveys();
+  if(surveys.length===0){
+    surveys=[
+      {id:'s1',title:'자연생태공원 체험학습',destination:'서울숲 생태공원',date:'2026-03-25',schoolCode:code,status:'active',targetGrades:['4','5','6'],teacherSurvey:true},
+      {id:'s2',title:'역사문화 탐방',destination:'경복궁·국립민속박물관',date:'2026-03-20',schoolCode:code,status:'active',targetGrades:['3','4','5'],teacherSurvey:true},
+      {id:'s3',title:'봄 소풍 체험활동',destination:'어린이대공원',date:'2026-04-05',schoolCode:code,status:'active',targetGrades:['K','1','2'],teacherSurvey:true},
     ];
     setSurveys(surveys);
   }
-  // 샘플 응답 데이터
-  let responses = getResponses();
-  if (responses.length === 0) {
-    const names = ['김하늘','이서준','박지민','최수아','정우진','강예린','조현우','윤서영','임동현','한소율',
-                   '서민재','오예은','류시우','남지호','배하린','신도윤','전아인','홍승우','문채원','양준서'];
-    const memos = ['숲에서 곤충 관찰이 정말 재미있었어요!','새로운 식물을 알게 되어 좋았습니다','친구들과 함께해서 즐거웠어요',
-                   '자연 속에서 뛰어놀 수 있어서 좋았다','생태 해설사 선생님 설명이 재밌었어요','나비 관찰이 신기했어요',
-                   '물고기를 직접 본 게 기억에 남아요','숲길 걷기가 좋았어요','새소리가 아름다웠습니다','벌레가 무서웠지만 재밌었어요'];
-    const improves = ['버스가 너무 오래 기다렸어요','점심 시간이 짧았어요','더 다양한 프로그램이 있으면 좋겠어요',
-                      '화장실이 멀었어요','사전 안내가 부족했어요','그늘이 더 있으면 좋겠어요',
-                      '자유 시간이 더 많았으면 좋겠어요','음료수 자판기가 있으면 좋겠어요','짐 보관할 곳이 필요해요','더 오래 있고 싶었어요'];
-    for (let i=0;i<20;i++) {
-      responses.push({
-        id: 'r'+i, surveyId:'s1', name:names[i],
-        role: i<18?'student':'teacher', grade:i<18?(4+Math.floor(i/6)):null,
-        answers: {
-          q1: 3+Math.floor(Math.random()*3), q2: 3+Math.floor(Math.random()*3),
-          q3: 2+Math.floor(Math.random()*3), q4: 3+Math.floor(Math.random()*3),
-          q5: 3+Math.floor(Math.random()*3),
-          q6: memos[i%10], q7: improves[i%10],
-        },
-        completionSec: 60+Math.floor(Math.random()*180),
-        submittedAt: new Date(2026,2,25,14,i).toISOString(),
-      });
+  let responses=getResponses();
+  if(responses.length===0){
+    const sNames=['김하늘','이서준','박지민','최수아','정우진','강예린','조현우','윤서영','임동현','한소율','서민재','오예은','류시우','남지호','배하린','신도윤','전아인','홍승우','문채원','양준서'];
+    const tNames=['김선영 선생님','박정훈 선생님','이미경 선생님'];
+    const memos=['숲에서 곤충 관찰이 정말 재미있었어요!','새로운 식물을 알게 되어 좋았습니다','친구들과 함께해서 즐거웠어요','자연 속에서 뛰어놀 수 있어서 좋았다','생태 해설사 선생님 설명이 재밌었어요','나비 관찰이 신기했어요','물고기를 직접 본 게 기억에 남아요','숲길 걷기가 좋았어요','새소리가 아름다웠습니다','벌레가 무서웠지만 재밌었어요'];
+    const improves=['버스가 너무 오래 기다렸어요','점심 시간이 짧았어요','더 다양한 프로그램이 있으면 좋겠어요','화장실이 멀었어요','사전 안내가 부족했어요','그늘이 더 있으면 좋겠어요','자유 시간이 더 많았으면 좋겠어요','음료수 자판기가 있으면 좋겠어요','짐 보관할 곳이 필요해요','더 오래 있고 싶었어요'];
+    const tMemos=['학생들이 직접 관찰하며 탐구하는 모습이 인상적이었습니다','교육과정과 잘 연계되어 효과적인 체험이었습니다','해설사의 눈높이 설명이 학생 이해도를 높였습니다'];
+    const tImproves=['사전 교육 자료가 미리 제공되면 좋겠습니다','학생 수 대비 인솔 인력이 부족했습니다','응급 상황 대비 매뉴얼이 더 구체적이면 좋겠습니다'];
+    for(let i=0;i<20;i++){
+      const grades=['4','5','6'];
+      responses.push({id:'r'+i,surveyId:'s1',name:sNames[i],role:'student',grade:grades[i%3],answers:{q1:3+Math.floor(Math.random()*3),q2:3+Math.floor(Math.random()*3),q3:2+Math.floor(Math.random()*3),q4:3+Math.floor(Math.random()*3),q5:3+Math.floor(Math.random()*3),q6:memos[i%10],q7:improves[i%10]},completionSec:60+Math.floor(Math.random()*180),submittedAt:new Date(2026,2,25,14,i).toISOString()});
+    }
+    for(let i=0;i<3;i++){
+      responses.push({id:'t'+i,surveyId:'s1',name:tNames[i],role:'teacher',grade:null,answers:{q1:4+Math.floor(Math.random()*2),q2:4+Math.floor(Math.random()*2),q3:3+Math.floor(Math.random()*2),q4:4+Math.floor(Math.random()*2),q5:4+Math.floor(Math.random()*2),tq1:3+Math.floor(Math.random()*3),tq2:4+Math.floor(Math.random()*2),tq3:3+Math.floor(Math.random()*2),q6:tMemos[i],q7:tImproves[i]},completionSec:120+Math.floor(Math.random()*120),submittedAt:new Date(2026,2,25,16,i).toISOString()});
+    }
+    // 유치원 샘플
+    const kNames=['김예준','이하음','박시우','최지아','정하준'];
+    const kMemos=['동물 보는 게 제일 좋았어요!','나비가 예뻤어요','친구랑 놀아서 좋았어요','아이스크림 먹었어요','꽃이 예뻤어요'];
+    for(let i=0;i<5;i++){
+      responses.push({id:'k'+i,surveyId:'s3',name:kNames[i],role:'student',grade:'K',answers:{q1:4+Math.floor(Math.random()*2),q2:4+Math.floor(Math.random()*2),q3:3+Math.floor(Math.random()*2),q4:4+Math.floor(Math.random()*2),q5:4+Math.floor(Math.random()*2),q6:kMemos[i],q7:''},completionSec:40+Math.floor(Math.random()*60),submittedAt:new Date(2026,3,5,11,i).toISOString()});
     }
     setResponses(responses);
   }
 }
 
-/* ═══════════════════════════════════════════════════════════ */
-/*  설문 목록 화면                                             */
-/* ═══════════════════════════════════════════════════════════ */
-function goToList() {
-  if (!APP.user) { APP.user = getData('currentUser', null); }
-  if (!APP.user) { showPage('login'); return; }
-
-  const isTeacher = APP.user.role === 'teacher';
-  document.getElementById('listTitle').textContent = isTeacher ? '설문 관리' : '설문 목록';
-  document.getElementById('userEmoji').textContent = isTeacher ? '👩‍🏫' : '🧑‍🎓';
-  document.getElementById('userDisplay').textContent = APP.user.name + (isTeacher?' 선생님':'');
-  document.getElementById('userMeta').textContent =
-    APP.user.schoolCode + ' | ' + (isTeacher?'교사':'학생') + (APP.user.grade?' | '+APP.user.grade+'학년':'');
-  document.getElementById('teacherControls').style.display = isTeacher?'block':'none';
-
+/* ═══ 설문 목록 ═══ */
+function goToList(){
+  if(!APP.user){APP.user=getData('currentUser',null)}
+  if(!APP.user){showPage('login');return}
+  const isT=APP.user.role==='teacher';
+  document.getElementById('listTitle').textContent=isT?'설문 관리':'설문 목록';
+  document.getElementById('userEmoji').textContent=isT?'👩‍🏫':'🧑‍🎓';
+  document.getElementById('userDisplay').textContent=APP.user.name+(isT?' (인솔교사)':'');
+  const gradeLbl=APP.user.grade==='K'?'유치원':(APP.user.grade?APP.user.grade+'학년':'');
+  document.getElementById('userMeta').textContent=APP.user.schoolCode+' | '+(isT?'인솔교사':'학생')+(gradeLbl?' | '+gradeLbl:'');
+  document.getElementById('teacherControls').style.display=isT?'block':'none';
   renderSurveyList();
   showPage('list');
 }
 
-function renderSurveyList() {
-  const surveys = getSurveys().filter(s => s.schoolCode === APP.user.schoolCode);
-  const responses = getResponses();
-  const isTeacher = APP.user.role === 'teacher';
-  const el = document.getElementById('surveyList');
+function renderSurveyList(){
+  const surveys=getSurveys().filter(s=>s.schoolCode===APP.user.schoolCode);
+  const responses=getResponses();
+  const isT=APP.user.role==='teacher';
+  const el=document.getElementById('surveyList');
+  const icons=['🌿','🏛️','🎨','🔬','🏔️','🌸','🦋','🎭'];
+  const colors=['#42A5F5','#66BB6A','#FFA726','#AB47BC','#EF5350','#FF7043','#26C6DA','#EC407A'];
 
-  el.innerHTML = surveys.map(s => {
-    const resps = responses.filter(r => r.surveyId === s.id);
-    const myResp = resps.find(r => r.name === APP.user.name && r.role === APP.user.role);
-    const colors = ['#42A5F5','#66BB6A','#FFA726','#AB47BC','#EF5350'];
-    const icons = ['🌿','🏛️','🎨','🔬','🏔️'];
-    const idx = surveys.indexOf(s) % 5;
+  // 학생: 자기 학년에 해당하는 설문만 표시
+  const filtered=isT?surveys:surveys.filter(s=>{
+    const tg=s.targetGrades||[];
+    return tg.length===0||tg.includes(APP.user.grade);
+  });
 
-    let rightContent = '';
-    if (isTeacher) {
-      rightContent = '<div style="text-align:right"><div style="font-size:18px;font-weight:800;color:var(--primary)">'+resps.length+'</div><div style="font-size:11px;color:var(--text2)">응답</div></div>';
+  el.innerHTML=filtered.map((s,si)=>{
+    const resps=responses.filter(r=>r.surveyId===s.id);
+    const myResp=resps.find(r=>r.name===APP.user.name&&r.role===APP.user.role);
+    const idx=si%icons.length;
+    const tg=s.targetGrades||[];
+
+    let rightContent='';
+    if(isT){
+      const sCount=resps.filter(r=>r.role==='student').length;
+      const tCount=resps.filter(r=>r.role==='teacher').length;
+      rightContent='<div style="text-align:right"><div style="font-size:16px;font-weight:800;color:var(--primary)">'+sCount+'<span style="font-size:11px;color:var(--text2)">명</span></div>'+(s.teacherSurvey?'<div style="font-size:12px;color:var(--teacher)">교사'+tCount+'</div>':'')+'</div>';
     } else {
-      rightContent = myResp ? '<span style="font-size:28px">✅</span>' : '<span style="font-size:28px">📝</span>';
+      rightContent=myResp?'<span style="font-size:28px">✅</span>':'<span style="font-size:28px">📝</span>';
     }
 
-    return '<div class="card survey-item" onclick="'+(isTeacher?'openDashboard':'startSurvey')+'(\''+s.id+'\')">'+
+    const gradeTags=tg.map(g=>{
+      const isK=g==='K';
+      return '<span class="grade-tag'+(isK?' kinder':'')+'">'+(isK?'유치원':g+'학년')+'</span>';
+    }).join('');
+
+    const clickAction=isT?'openDashboard':'startSurvey';
+    // 교사: 설문 참여 가능한 경우 별도 버튼
+    let teacherRespondBtn='';
+    if(isT&&s.teacherSurvey){
+      const tResp=resps.find(r=>r.name===APP.user.name&&r.role==='teacher');
+      teacherRespondBtn='<div style="padding:0 16px 12px"><button class="btn '+(tResp?'btn-outline':'btn-secondary')+'" onclick="event.stopPropagation();startSurvey(''+s.id+'')" style="padding:10px;font-size:13px">'+(tResp?'✅ 응답 완료 (재응답)':'✍️ 인솔교사 설문 응답하기')+'</button></div>';
+    }
+
+    return '<div class="card" style="padding:0;overflow:hidden"><div class="survey-item" onclick="'+clickAction+'(''+s.id+'')">'+
       '<div class="survey-icon" style="background:'+colors[idx]+'22">'+icons[idx]+'</div>'+
-      '<div class="survey-info"><h3>'+s.title+'</h3><p>'+s.destination+' · '+s.date+'</p></div>'+
-      rightContent+'</div>';
+      '<div class="survey-info"><h3>'+s.title+'</h3><p>'+s.destination+' · '+s.date+'</p>'+
+      '<div class="grade-tags">'+gradeTags+'</div></div>'+rightContent+'</div>'+teacherRespondBtn+'</div>';
   }).join('');
 
-  if (surveys.length === 0) {
-    el.innerHTML = '<div style="text-align:center;padding:40px;color:var(--text2)"><div style="font-size:48px;margin-bottom:16px">📋</div><p>등록된 설문이 없습니다</p></div>';
+  if(filtered.length===0){
+    el.innerHTML='<div style="text-align:center;padding:40px;color:var(--text2)"><div style="font-size:48px;margin-bottom:16px">📋</div><p>'+(isT?'등록된 설문이 없습니다':'해당 학년의 설문이 없습니다')+'</p></div>';
   }
 }
 
-/* ═══════════════════════════════════════════════════════════ */
-/*  설문 추가 (교사)                                           */
-/* ═══════════════════════════════════════════════════════════ */
-function showAddSurvey() {
+/* ═══ 설문 추가 ═══ */
+let newSurveyGrades=[], newTeacherSurvey=true;
+
+function showAddSurvey(){
   document.getElementById('addSurveyModal').style.display='flex';
-  document.getElementById('newDate').value = new Date().toISOString().split('T')[0];
+  document.getElementById('newDate').value=new Date().toISOString().split('T')[0];
+  newSurveyGrades=[];
+  newTeacherSurvey=true;
+  renderGradeChecks();
+  setTeacherSurvey(true);
 }
-function closeModal() { document.getElementById('addSurveyModal').style.display='none'; }
-function closeModalOutside(e) { if(e.target===e.currentTarget) closeModal(); }
+function closeModal(){document.getElementById('addSurveyModal').style.display='none'}
+function closeModalOutside(e){if(e.target===e.currentTarget)closeModal()}
 
-function addSurvey() {
-  const title = document.getElementById('newTitle').value.trim();
-  const dest = document.getElementById('newDest').value.trim();
-  const date = document.getElementById('newDate').value;
-  if (!title) { showToast('체험학습 이름을 입력하세요'); return; }
+function renderGradeChecks(){
+  const el=document.getElementById('gradeCheckGrid');
+  el.innerHTML=GRADE_OPTIONS.map(g=>{
+    const checked=newSurveyGrades.includes(g.value);
+    const kClass=g.isKinder?' kinder':'';
+    return '<div class="grade-check'+kClass+(checked?' checked':'')+'" onclick="toggleGradeCheck(''+g.value+'')">'+g.label+(checked?' ✓':'')+'</div>';
+  }).join('');
+}
+function toggleGradeCheck(v){
+  const idx=newSurveyGrades.indexOf(v);
+  if(idx>=0)newSurveyGrades.splice(idx,1);else newSurveyGrades.push(v);
+  renderGradeChecks();
+}
+function gradeCheckAll(){newSurveyGrades=GRADE_OPTIONS.map(g=>g.value);renderGradeChecks()}
+function gradeCheckNone(){newSurveyGrades=[];renderGradeChecks()}
 
-  const surveys = getSurveys();
-  surveys.push({
-    id: 's'+Date.now(), title, destination:dest||'미정', date:date||'미정',
-    schoolCode: APP.user.schoolCode, status:'active'
-  });
+function setTeacherSurvey(v){
+  newTeacherSurvey=v;
+  document.getElementById('teacherSurveyYes').className='grade-check'+(v?' checked':'');
+  document.getElementById('teacherSurveyNo').className='grade-check'+(v?'':' checked');
+}
+
+function addSurvey(){
+  const title=document.getElementById('newTitle').value.trim();
+  const dest=document.getElementById('newDest').value.trim();
+  const date=document.getElementById('newDate').value;
+  if(!title){showToast('체험학습 이름을 입력하세요');return}
+  if(newSurveyGrades.length===0){showToast('실시 학년을 1개 이상 선택하세요');return}
+  const surveys=getSurveys();
+  surveys.push({id:'s'+Date.now(),title,destination:dest||'미정',date:date||'미정',schoolCode:APP.user.schoolCode,status:'active',targetGrades:[...newSurveyGrades].sort(),teacherSurvey:newTeacherSurvey});
   setSurveys(surveys);
-  closeModal();
-  renderSurveyList();
+  closeModal();renderSurveyList();
   showToast('설문이 생성되었습니다!');
 }
 
-/* ═══════════════════════════════════════════════════════════ */
-/*  설문 응답 화면                                             */
-/* ═══════════════════════════════════════════════════════════ */
-function startSurvey(surveyId) {
-  const responses = getResponses();
-  const myResp = responses.find(r => r.surveyId===surveyId && r.name===APP.user.name && r.role===APP.user.role);
-  if (myResp && APP.user.role==='student') {
-    showToast('이미 응답을 완료했습니다'); return;
+/* ═══ 설문 응답 ═══ */
+let currentQuestions=[];
+
+function startSurvey(surveyId){
+  const responses=getResponses();
+  const survey=getSurveys().find(s=>s.id===surveyId);
+  const isT=APP.user.role==='teacher';
+
+  // 학생 중복 응답 방지 (교사는 재응답 가능)
+  if(!isT){
+    const myResp=responses.find(r=>r.surveyId===surveyId&&r.name===APP.user.name&&r.role==='student');
+    if(myResp){showToast('이미 응답을 완료했습니다');return}
   }
 
-  const survey = getSurveys().find(s => s.id===surveyId);
-  APP.currentSurveyId = surveyId;
-  APP.currentQ = 0;
-  APP.answers = {};
-  APP.startTime = Date.now();
+  // 교사인데 설문 참여가 비활성화된 경우
+  if(isT&&!survey.teacherSurvey){showToast('이 설문은 교사 응답이 비활성화되어 있습니다');return}
 
-  document.getElementById('surveyTitle').textContent = survey.title;
-  document.getElementById('surveyMeta').textContent = survey.date + ' · ' + survey.destination + ' | 총 '+DEFAULT_QUESTIONS.length+'문항';
+  currentQuestions=isT?TEACHER_QUESTIONS:STUDENT_QUESTIONS;
+  APP.currentSurveyId=surveyId;
+  APP.currentQ=0;
+  APP.answers={};
+  APP.startTime=Date.now();
+
+  const tg=survey.targetGrades||[];
+  const gradeText=tg.map(g=>g==='K'?'유치원':g+'학년').join(', ');
+
+  document.getElementById('surveyTitle').textContent=survey.title;
+  document.getElementById('surveyMeta').textContent=survey.date+' · '+survey.destination+' | 총 '+currentQuestions.length+'문항';
+  document.getElementById('surveyRoleBadge').textContent=isT?'인솔교사용':'학생용';
 
   renderQuestion();
   showPage('survey');
 }
 
-function renderQuestion() {
-  const q = DEFAULT_QUESTIONS[APP.currentQ];
-  const total = DEFAULT_QUESTIONS.length;
-  const pct = ((APP.currentQ+1)/total*100).toFixed(0);
+function renderQuestion(){
+  const q=currentQuestions[APP.currentQ];
+  const total=currentQuestions.length;
+  const pct=((APP.currentQ+1)/total*100).toFixed(0);
+  document.getElementById('progressFill').style.width=pct+'%';
+  document.getElementById('progressText').textContent=(APP.currentQ+1)+' / '+total;
+  document.getElementById('prevBtn').style.display=APP.currentQ>0?'block':'none';
+  document.getElementById('nextBtn').textContent=APP.currentQ===total-1?'제출하기 ✓':'다음 →';
+  document.getElementById('nextBtn').className='btn '+(APP.currentQ===total-1?'btn-secondary':'btn-primary');
 
-  document.getElementById('progressFill').style.width = pct+'%';
-  document.getElementById('progressText').textContent = (APP.currentQ+1)+' / '+total;
-  document.getElementById('prevBtn').style.display = APP.currentQ>0?'block':'none';
-  document.getElementById('nextBtn').textContent = APP.currentQ===total-1 ? '제출하기 ✓' : '다음 →';
-  document.getElementById('nextBtn').className = 'btn ' + (APP.currentQ===total-1?'btn-secondary':'btn-primary');
+  const area=document.getElementById('questionArea');
+  const isTeacherQ=q.id.startsWith('tq');
+  let html='<span class="q-badge" style="'+(isTeacherQ?'background:var(--teacher)':'')+'">Q'+(APP.currentQ+1)+(isTeacherQ?' 교사':'')+'</span>';
+  html+='<div class="q-text">'+q.text+'</div>';
 
-  const area = document.getElementById('questionArea');
-  let html = '<span class="q-badge">Q'+(APP.currentQ+1)+'</span>';
-  html += '<div class="q-text">'+q.text+'</div>';
-
-  if (q.type === 'star') {
-    const cur = APP.answers[q.id] || 0;
-    html += '<div class="stars">';
-    for (let i=1;i<=5;i++) {
-      html += '<button class="star-btn" onclick="setStar(\''+q.id+'\','+i+')">'+(i<=cur?'⭐':'☆')+'</button>';
-    }
-    html += '</div>';
-    const labels = ['','매우 아쉬워요 😢','조금 아쉬워요 😕','보통이에요 😐','좋았어요! 😊','최고예요! 🤩'];
-    const colors = ['','var(--error)','var(--accent)','var(--text2)','var(--primary-light)','var(--secondary)'];
-    html += '<div class="star-label" style="color:'+colors[cur]+'">'+(cur?labels[cur]:'별을 터치해주세요')+'</div>';
-  }
-  else if (q.type === 'text_short' || q.type === 'text_long') {
-    const val = APP.answers[q.id] || '';
-    const rows = q.type==='text_long'?5:2;
-    const max = q.type==='text_long'?500:100;
-    html += '<textarea class="text-area" rows="'+rows+'" maxlength="'+max+'" placeholder="'+(q.type==='text_long'?'자유롭게 의견을 작성해주세요...':'간단하게 작성해주세요')+'" oninput="setTextAnswer(\''+q.id+'\',this)">'+val+'</textarea>';
-    html += '<div class="char-count"><span id="charCount">'+val.length+'</span>/'+max+'</div>';
-  }
-
-  area.innerHTML = html;
-}
-
-function setStar(qid, val) {
-  APP.answers[qid] = val;
-  renderQuestion();
-}
-
-function setTextAnswer(qid, el) {
-  APP.answers[qid] = el.value;
-  document.getElementById('charCount').textContent = el.value.length;
-}
-
-function nextQuestion() {
-  const q = DEFAULT_QUESTIONS[APP.currentQ];
-  // 유효성 검사
-  if (q.type==='star' && !APP.answers[q.id]) { showToast('별점을 선택해주세요'); return; }
-  if (q.type.startsWith('text') && (!APP.answers[q.id] || APP.answers[q.id].trim().length<2)) {
-    showToast('2자 이상 입력해주세요'); return;
-  }
-
-  if (APP.currentQ < DEFAULT_QUESTIONS.length-1) {
-    APP.currentQ++;
-    renderQuestion();
+  if(q.type==='star'){
+    const cur=APP.answers[q.id]||0;
+    html+='<div class="stars">';
+    for(let i=1;i<=5;i++) html+='<button class="star-btn" onclick="setStar(''+q.id+'','+i+')">'+(i<=cur?'⭐':'☆')+'</button>';
+    html+='</div>';
+    const labels=['','매우 아쉬워요 😢','조금 아쉬워요 😕','보통이에요 😐','좋았어요! 😊','최고예요! 🤩'];
+    const clrs=['','var(--error)','var(--accent)','var(--text2)','var(--primary-light)','var(--secondary)'];
+    html+='<div class="star-label" style="color:'+clrs[cur]+'">'+(cur?labels[cur]:'별을 터치해주세요')+'</div>';
   } else {
-    submitSurvey();
+    const val=APP.answers[q.id]||'';
+    const rows=q.type==='text_long'?5:2;
+    const max=q.type==='text_long'?500:100;
+    html+='<textarea class="text-area" rows="'+rows+'" maxlength="'+max+'" placeholder="'+(q.type==='text_long'?'자유롭게 의견을 작성해주세요...':'간단하게 작성해주세요')+'" oninput="setTextAnswer(''+q.id+'',this)">'+val+'</textarea>';
+    html+='<div class="char-count"><span id="charCount">'+val.length+'</span>/'+max+'</div>';
   }
+  area.innerHTML=html;
 }
 
-function prevQuestion() {
-  if (APP.currentQ > 0) { APP.currentQ--; renderQuestion(); }
-}
+function setStar(qid,val){APP.answers[qid]=val;renderQuestion()}
+function setTextAnswer(qid,el){APP.answers[qid]=el.value;document.getElementById('charCount').textContent=el.value.length}
 
-function submitSurvey() {
-  const responses = getResponses();
+function nextQuestion(){
+  const q=currentQuestions[APP.currentQ];
+  if(q.type==='star'&&!APP.answers[q.id]){showToast('별점을 선택해주세요');return}
+  if(q.type.startsWith('text')&&(!APP.answers[q.id]||APP.answers[q.id].trim().length<2)){
+    if(q.type==='text_long'&&APP.currentQ===currentQuestions.length-1){/* 마지막 주관식은 선택 */}
+    else{showToast('2자 이상 입력해주세요');return}
+  }
+  if(APP.currentQ<currentQuestions.length-1){APP.currentQ++;renderQuestion()}
+  else submitSurvey();
+}
+function prevQuestion(){if(APP.currentQ>0){APP.currentQ--;renderQuestion()}}
+
+function submitSurvey(){
+  const responses=getResponses();
+  // 교사 재응답 시 이전 응답 제거
+  if(APP.user.role==='teacher'){
+    const existIdx=responses.findIndex(r=>r.surveyId===APP.currentSurveyId&&r.name===APP.user.name&&r.role==='teacher');
+    if(existIdx>=0) responses.splice(existIdx,1);
+  }
   responses.push({
-    id: 'r'+Date.now(),
-    surveyId: APP.currentSurveyId,
-    name: APP.user.name,
-    role: APP.user.role,
-    grade: APP.user.grade,
-    answers: {...APP.answers},
-    completionSec: Math.round((Date.now()-APP.startTime)/1000),
-    submittedAt: new Date().toISOString(),
+    id:'r'+Date.now(),surveyId:APP.currentSurveyId,name:APP.user.name,
+    role:APP.user.role,grade:APP.user.grade,
+    answers:{...APP.answers},
+    completionSec:Math.round((Date.now()-APP.startTime)/1000),
+    submittedAt:new Date().toISOString(),
   });
   setResponses(responses);
   showPage('complete');
 }
 
-function showExitConfirm() {
-  if (confirm('설문을 중단할까요?\n작성 중인 내용은 저장되지 않습니다.')) goToList();
-}
+function showExitConfirm(){if(confirm('설문을 중단할까요?\n작성 중인 내용은 저장되지 않습니다.'))goToList()}
 
-/* ═══════════════════════════════════════════════════════════ */
-/*  대시보드 (교사용)                                          */
-/* ═══════════════════════════════════════════════════════════ */
-let barChartInstance = null;
-let radarChartInstance = null;
+/* ═══ 대시보드 ═══ */
+let barChartInstance=null,radarChartInstance=null;
+function openDashboard(surveyId){APP.currentSurveyId=surveyId;goToDashboard()}
 
-function openDashboard(surveyId) {
-  APP.currentSurveyId = surveyId;
-  goToDashboard();
-}
+function goToDashboard(){
+  const survey=getSurveys().find(s=>s.id===APP.currentSurveyId);
+  const allResp=getResponses().filter(r=>r.surveyId===APP.currentSurveyId);
+  if(allResp.length===0){showToast('아직 응답이 없습니다');return}
 
-function goToDashboard() {
-  const survey = getSurveys().find(s=>s.id===APP.currentSurveyId);
-  const allResp = getResponses().filter(r=>r.surveyId===APP.currentSurveyId);
-  if (allResp.length===0) { showToast('아직 응답이 없습니다'); return; }
+  const cats=['q1','q2','q3','q4','q5'];
+  const catLabels=['프로그램','안전관리','이동편의','교육효과','재참여'];
+  const students=allResp.filter(r=>r.role==='student');
+  const teachers=allResp.filter(r=>r.role==='teacher');
+  const kinderStudents=students.filter(r=>r.grade==='K');
 
-  const cats = ['q1','q2','q3','q4','q5'];
-  const catLabels = ['프로그램','안전관리','이동편의','교육효과','재참여'];
-
-  // 평균 점수
-  const avgScores = cats.map(qid => {
-    const scores = allResp.map(r=>r.answers[qid]).filter(s=>typeof s==='number');
-    return scores.length ? (scores.reduce((a,b)=>a+b,0)/scores.length) : 0;
+  const avgScores=cats.map(qid=>{
+    const scores=allResp.map(r=>r.answers[qid]).filter(s=>typeof s==='number');
+    return scores.length?(scores.reduce((a,b)=>a+b,0)/scores.length):0;
   });
-  const overallAvg = (avgScores.reduce((a,b)=>a+b,0)/avgScores.length).toFixed(1);
+  const overallAvg=(avgScores.reduce((a,b)=>a+b,0)/avgScores.length).toFixed(1);
 
-  // 감성 분석 (간이)
-  const texts = allResp.map(r=>r.answers.q6||'').concat(allResp.map(r=>r.answers.q7||'')).filter(t=>t);
-  const posWords = ['좋','재미','최고','즐거','신기','아름답','만족','행복','새로','훌륭','감동','사랑'];
-  const negWords = ['아쉬','부족','불편','멀','짧','없','힘들','지루','무서','나쁘','오래','불만'];
-  let posCount=0, negCount=0;
-  texts.forEach(t => {
-    if (posWords.some(w=>t.includes(w))) posCount++;
-    if (negWords.some(w=>t.includes(w))) negCount++;
-  });
-  const total = Math.max(texts.length, 1);
-  const negPct = Math.round(negCount/total*100);
-  const posPct = Math.round(posCount/total*100);
-  const neuPct = 100 - posPct - negPct;
+  // 감성 분석
+  const texts=allResp.map(r=>r.answers.q6||'').concat(allResp.map(r=>r.answers.q7||'')).filter(t=>t);
+  const posWords=['좋','재미','최고','즐거','신기','아름답','만족','행복','새로','훌륭','감동','예쁘','인상'];
+  const negWords=['아쉬','부족','불편','멀','짧','없','힘들','지루','무서','나쁘','오래','불만'];
+  let posC=0,negC=0;
+  texts.forEach(t=>{if(posWords.some(w=>t.includes(w)))posC++;if(negWords.some(w=>t.includes(w)))negC++});
+  const tot=Math.max(texts.length,1);
+  const posPct=Math.round(posC/tot*100),negPct=Math.round(negC/tot*100),neuPct=Math.max(0,100-posPct-negPct);
 
-  // 핵심 지표
-  document.getElementById('statTotal').textContent = allResp.length;
-  document.getElementById('statAvg').textContent = overallAvg;
-  document.getElementById('statRate').textContent = posPct + '%';
+  // 설문 정보
+  const tg=(survey.targetGrades||[]).map(g=>g==='K'?'유치원':g+'학년').join(', ');
+  document.getElementById('dashSurveyInfo').innerHTML='<b>'+survey.title+'</b><br>'+survey.date+' · '+survey.destination+'<br>대상: '+tg+(survey.teacherSurvey?' + 인솔교사':'');
+
+  document.getElementById('statTotal').textContent=allResp.length;
+  document.getElementById('statAvg').textContent=overallAvg;
+  document.getElementById('statRate').textContent=posPct+'%';
+  document.getElementById('statStudents').textContent=students.length;
+  document.getElementById('statTeachers').textContent=teachers.length;
+  document.getElementById('statKinder').textContent=kinderStudents.length;
 
   // 바 차트
-  if (barChartInstance) barChartInstance.destroy();
-  const barCtx = document.getElementById('barChart').getContext('2d');
-  barChartInstance = new Chart(barCtx, {
-    type:'bar',
-    data:{
-      labels:catLabels,
-      datasets:[{ data:avgScores.map(v=>+v.toFixed(2)),
-        backgroundColor:['#42A5F5','#66BB6A','#FFA726','#AB47BC','#EF5350'],
-        borderRadius:8, barPercentage:0.6 }]
-    },
-    options:{
-      responsive:true, plugins:{legend:{display:false},
-        tooltip:{callbacks:{label:ctx=>ctx.parsed.y.toFixed(2)+'점'}}},
-      scales:{ y:{beginAtZero:true,max:5,ticks:{stepSize:1}}, x:{grid:{display:false}} }
-    }
+  if(barChartInstance)barChartInstance.destroy();
+  barChartInstance=new Chart(document.getElementById('barChart').getContext('2d'),{
+    type:'bar',data:{labels:catLabels,datasets:[{data:avgScores.map(v=>+v.toFixed(2)),backgroundColor:['#42A5F5','#66BB6A','#FFA726','#AB47BC','#EF5350'],borderRadius:8,barPercentage:0.6}]},
+    options:{responsive:true,plugins:{legend:{display:false}},scales:{y:{beginAtZero:true,max:5,ticks:{stepSize:1}},x:{grid:{display:false}}}}
   });
 
   // 감성 바
-  document.getElementById('sentimentBar').innerHTML =
-    '<div style="width:'+posPct+'%;background:var(--secondary)"></div>'+
-    '<div style="width:'+neuPct+'%;background:var(--accent)"></div>'+
-    '<div style="width:'+negPct+'%;background:var(--error)"></div>';
-  document.getElementById('sentimentLabels').innerHTML =
-    '<div><div class="s-value" style="color:var(--secondary)">'+posPct+'%</div><div class="s-label">긍정</div></div>'+
-    '<div><div class="s-value" style="color:var(--accent)">'+neuPct+'%</div><div class="s-label">중립</div></div>'+
-    '<div><div class="s-value" style="color:var(--error)">'+negPct+'%</div><div class="s-label">부정</div></div>';
+  document.getElementById('sentimentBar').innerHTML='<div style="width:'+posPct+'%;background:var(--secondary)"></div><div style="width:'+neuPct+'%;background:var(--accent)"></div><div style="width:'+negPct+'%;background:var(--error)"></div>';
+  document.getElementById('sentimentLabels').innerHTML='<div><div class="s-value" style="color:var(--secondary)">'+posPct+'%</div><div class="s-label">긍정</div></div><div><div class="s-value" style="color:var(--accent)">'+neuPct+'%</div><div class="s-label">중립</div></div><div><div class="s-value" style="color:var(--error)">'+negPct+'%</div><div class="s-label">부정</div></div>';
 
   // 레이더 차트 (학생 vs 교사)
-  const students = allResp.filter(r=>r.role==='student');
-  const teachers = allResp.filter(r=>r.role==='teacher');
-  const studentAvg = cats.map(qid => {
-    const sc = students.map(r=>r.answers[qid]).filter(s=>typeof s==='number');
-    return sc.length ? +(sc.reduce((a,b)=>a+b,0)/sc.length).toFixed(2) : 0;
-  });
-  const teacherAvg = cats.map(qid => {
-    const sc = teachers.map(r=>r.answers[qid]).filter(s=>typeof s==='number');
-    return sc.length ? +(sc.reduce((a,b)=>a+b,0)/sc.length).toFixed(2) : 0;
+  const sAvg=cats.map(qid=>{const sc=students.map(r=>r.answers[qid]).filter(s=>typeof s==='number');return sc.length?+(sc.reduce((a,b)=>a+b,0)/sc.length).toFixed(2):0});
+  const tAvg=cats.map(qid=>{const sc=teachers.map(r=>r.answers[qid]).filter(s=>typeof s==='number');return sc.length?+(sc.reduce((a,b)=>a+b,0)/sc.length).toFixed(2):0});
+  const datasets=[{label:'학생 ('+students.length+'명)',data:sAvg,borderColor:'#42A5F5',backgroundColor:'rgba(66,165,245,0.15)',pointRadius:4,borderWidth:2}];
+  if(teachers.length>0) datasets.push({label:'인솔교사 ('+teachers.length+'명)',data:tAvg,borderColor:'#66BB6A',backgroundColor:'rgba(102,187,106,0.15)',pointRadius:4,borderWidth:2});
+
+  if(radarChartInstance)radarChartInstance.destroy();
+  radarChartInstance=new Chart(document.getElementById('radarChart').getContext('2d'),{
+    type:'radar',data:{labels:catLabels,datasets},
+    options:{responsive:true,scales:{r:{beginAtZero:true,max:5,ticks:{stepSize:1}}}}
   });
 
-  if (radarChartInstance) radarChartInstance.destroy();
-  const radarCtx = document.getElementById('radarChart').getContext('2d');
-  radarChartInstance = new Chart(radarCtx, {
-    type:'radar',
-    data:{
-      labels:catLabels,
-      datasets:[
-        { label:'학생 ('+students.length+'명)', data:studentAvg, borderColor:'#42A5F5', backgroundColor:'rgba(66,165,245,0.15)', pointRadius:4, borderWidth:2 },
-        { label:'교사 ('+teachers.length+'명)', data:teacherAvg, borderColor:'#66BB6A', backgroundColor:'rgba(102,187,106,0.15)', pointRadius:4, borderWidth:2 },
-      ]
-    },
-    options:{ responsive:true, scales:{ r:{ beginAtZero:true, max:5, ticks:{stepSize:1} } } }
-  });
-
-  // 주관식 응답 탭
-  const textEl = document.getElementById('tabTexts');
-  const memoResps = allResp.filter(r=>r.answers.q6||r.answers.q7);
-  textEl.innerHTML = memoResps.map(r =>
-    '<div class="response-item">'+
-    '<div class="r-meta">'+r.name+' · '+(r.role==='teacher'?'교사':r.grade+'학년')+' · '+new Date(r.submittedAt).toLocaleString('ko')+'</div>'+
-    (r.answers.q6?'<div class="r-text" style="margin-bottom:6px">💬 기억에 남는 활동: <b>'+r.answers.q6+'</b></div>':'')+
-    (r.answers.q7?'<div class="r-text">💡 개선 의견: '+r.answers.q7+'</div>':'')+
-    '</div>'
-  ).join('');
+  // 주관식 탭
+  const textEl=document.getElementById('tabTexts');
+  const memoResps=allResp.filter(r=>r.answers.q6||r.answers.q7);
+  textEl.innerHTML=memoResps.map(r=>{
+    const isT=r.role==='teacher';
+    const roleBadge=isT?'<span class="r-role-badge" style="background:#E8F5E9;color:#2E7D32">인솔교사</span>':'<span class="r-role-badge" style="background:#E3F2FD;color:#1565C0">'+(r.grade==='K'?'유치원':r.grade+'학년')+'</span>';
+    return '<div class="response-item'+(isT?' teacher-resp':'')+'"><div class="r-meta">'+r.name+' '+roleBadge+' · '+new Date(r.submittedAt).toLocaleString('ko')+'</div>'+(r.answers.q6?'<div class="r-text" style="margin-bottom:6px">💬 '+r.answers.q6+'</div>':'')+(r.answers.q7?'<div class="r-text">💡 '+r.answers.q7+'</div>':'')+'</div>';
+  }).join('');
 
   // 전체 응답 탭
-  const allEl = document.getElementById('tabAll');
-  allEl.innerHTML = allResp.map(r =>
-    '<div class="response-item">'+
-    '<div class="r-meta">'+r.name+' · '+(r.role==='teacher'?'교사':r.grade+'학년')+' · 소요시간 '+r.completionSec+'초</div>'+
-    '<div class="r-scores">'+cats.map((qid,i)=>'<span class="r-score">'+catLabels[i]+' '+r.answers[qid]+'점</span>').join('')+'</div>'+
-    '</div>'
-  ).join('');
+  const allEl=document.getElementById('tabAll');
+  allEl.innerHTML=allResp.map(r=>{
+    const isT=r.role==='teacher';
+    const roleBadge=isT?'<span class="r-role-badge" style="background:#E8F5E9;color:#2E7D32">인솔교사</span>':'<span class="r-role-badge" style="background:#E3F2FD;color:#1565C0">'+(r.grade==='K'?'유치원':r.grade+'학년')+'</span>';
+    let scoreHtml=cats.map((qid,i)=>'<span class="r-score">'+catLabels[i]+' '+(r.answers[qid]||'-')+'</span>').join('');
+    if(isT&&r.answers.tq1) scoreHtml+='<span class="r-score" style="background:#E8F5E9;color:#2E7D32">교육연계 '+r.answers.tq1+'</span><span class="r-score" style="background:#E8F5E9;color:#2E7D32">학생참여 '+(r.answers.tq2||'-')+'</span><span class="r-score" style="background:#E8F5E9;color:#2E7D32">기관협조 '+(r.answers.tq3||'-')+'</span>';
+    return '<div class="response-item'+(isT?' teacher-resp':'')+'"><div class="r-meta">'+r.name+' '+roleBadge+' · 소요시간 '+r.completionSec+'초</div><div class="r-scores">'+scoreHtml+'</div></div>';
+  }).join('');
 
   showPage('dashboard');
 }
 
-function showTab(btn, tabId) {
+function showTab(btn,tabId){
   document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
   btn.classList.add('active');
-  document.getElementById('tabTexts').style.display = tabId==='tabTexts'?'block':'none';
-  document.getElementById('tabAll').style.display = tabId==='tabAll'?'block':'none';
+  document.getElementById('tabTexts').style.display=tabId==='tabTexts'?'block':'none';
+  document.getElementById('tabAll').style.display=tabId==='tabAll'?'block':'none';
 }
 
-/* ═══════════════════════════════════════════════════════════ */
-/*  AI 리포트 생성                                             */
-/* ═══════════════════════════════════════════════════════════ */
-function goToReport() {
-  const survey = getSurveys().find(s=>s.id===APP.currentSurveyId);
-  const allResp = getResponses().filter(r=>r.surveyId===APP.currentSurveyId);
-  if (!survey || allResp.length===0) return;
+/* ═══ AI 리포트 ═══ */
+function goToReport(){
+  const survey=getSurveys().find(s=>s.id===APP.currentSurveyId);
+  const allResp=getResponses().filter(r=>r.surveyId===APP.currentSurveyId);
+  if(!survey||allResp.length===0)return;
+  const students=allResp.filter(r=>r.role==='student');
+  const teachers=allResp.filter(r=>r.role==='teacher');
+  const kinderCount=students.filter(r=>r.grade==='K').length;
 
-  const cats = ['q1','q2','q3','q4','q5'];
-  const catLabels = ['프로그램','안전관리','이동편의','교육효과','재참여'];
-  const avgScores = cats.map((qid,i) => {
-    const scores = allResp.map(r=>r.answers[qid]).filter(s=>typeof s==='number');
-    const avg = scores.length ? (scores.reduce((a,b)=>a+b,0)/scores.length).toFixed(1) : '0';
-    return { label:catLabels[i], avg:parseFloat(avg) };
+  const cats=['q1','q2','q3','q4','q5'];
+  const catLabels=['프로그램','안전관리','이동편의','교육효과','재참여'];
+  const avgScores=cats.map((qid,i)=>{
+    const scores=allResp.map(r=>r.answers[qid]).filter(s=>typeof s==='number');
+    return {label:catLabels[i],avg:scores.length?parseFloat((scores.reduce((a,b)=>a+b,0)/scores.length).toFixed(1)):0};
   });
-  const sorted = [...avgScores].sort((a,b)=>b.avg-a.avg);
-  const best = sorted[0];
-  const worst = sorted[sorted.length-1];
+  const sorted=[...avgScores].sort((a,b)=>b.avg-a.avg);
+  const best=sorted[0],worst=sorted[sorted.length-1];
+  const overallAvg=(avgScores.reduce((a,b)=>a+b.avg,0)/avgScores.length).toFixed(1);
 
-  // 주관식 키워드 빈도 분석
-  const allTexts = allResp.map(r=>(r.answers.q6||'')+(r.answers.q7||'')).join(' ');
-  const posWords = ['재미','좋','최고','즐거','신기','새로','만족','아름답','감동'];
-  const negWords = ['부족','불편','멀','짧','오래','힘들','없','지루','아쉬'];
-  const posCounts = posWords.map(w=>({word:w, count:(allTexts.match(new RegExp(w,'g'))||[]).length})).filter(x=>x.count>0).sort((a,b)=>b.count-a.count);
-  const negCounts = negWords.map(w=>({word:w, count:(allTexts.match(new RegExp(w,'g'))||[]).length})).filter(x=>x.count>0).sort((a,b)=>b.count-a.count);
-
-  // 개선 의견 수집
-  const improvements = allResp.map(r=>r.answers.q7).filter(Boolean);
-  const impKeywords = {};
-  improvements.forEach(t => {
-    ['버스','이동','대기','점심','식사','시간','화장실','안내','자료','그늘','더위','날씨','자유','프로그램'].forEach(w => {
-      if (t.includes(w)) impKeywords[w] = (impKeywords[w]||0)+1;
+  // 교사 전용 문항 분석
+  const tCats=['tq1','tq2','tq3'];
+  const tCatLabels=['교육연계','학생참여','기관협조'];
+  let teacherInsightHtml='';
+  if(teachers.length>0){
+    const tScores=tCats.map((qid,i)=>{
+      const sc=teachers.map(r=>r.answers[qid]).filter(s=>typeof s==='number');
+      return {label:tCatLabels[i],avg:sc.length?parseFloat((sc.reduce((a,b)=>a+b,0)/sc.length).toFixed(1)):0};
     });
-  });
-  const topImps = Object.entries(impKeywords).sort((a,b)=>b[1]-a[1]).slice(0,5);
+    teacherInsightHtml='<li><b>인솔교사 평가</b>: '+tScores.map(s=>s.label+' '+s.avg+'점').join(', ')+' — '+(tScores[0].avg>=4?'교육과정과의 연계성이 높게 평가되었습니다.':'교육과정 연계성 보완이 필요합니다.')+'</li>';
+  }
 
-  // 기억에 남는 활동
-  const memories = allResp.map(r=>r.answers.q6).filter(Boolean);
+  // 키워드 분석
+  const allTexts=allResp.map(r=>(r.answers.q6||'')+(r.answers.q7||'')).join(' ');
+  const posWords=['재미','좋','최고','즐거','신기','새로','만족','아름답','감동','예쁘','인상'];
+  const negWords=['부족','불편','멀','짧','오래','힘들','없','지루','아쉬'];
+  const posCounts=posWords.map(w=>({word:w,count:(allTexts.match(new RegExp(w,'g'))||[]).length})).filter(x=>x.count>0).sort((a,b)=>b.count-a.count);
 
-  // 리포트 메타
-  document.getElementById('reportMeta').textContent =
-    survey.title+' | '+survey.date+' | 응답 '+allResp.length+'건 분석';
+  const improvements=allResp.map(r=>r.answers.q7).filter(Boolean);
+  const impKeywords={};
+  improvements.forEach(t=>{['버스','이동','대기','점심','식사','시간','화장실','안내','자료','그늘','더위','자유','프로그램','안전','인솔','인력'].forEach(w=>{if(t.includes(w))impKeywords[w]=(impKeywords[w]||0)+1})});
+  const topImps=Object.entries(impKeywords).sort((a,b)=>b[1]-a[1]).slice(0,5);
 
-  // 리포트 내용 생성
-  let html = '';
+  const tg=(survey.targetGrades||[]).map(g=>g==='K'?'유치원':g+'학년').join(', ');
+  document.getElementById('reportMeta').textContent=survey.title+' | '+survey.date+' | 대상: '+tg+'\n학생 '+students.length+'명'+(kinderCount>0?' (유치원 '+kinderCount+'명 포함)':'')+' + 교사 '+teachers.length+'명 분석';
+
+  let html='';
 
   // 1. 핵심 시사점
-  html += '<div class="insight-card ic-primary">';
-  html += '<h3>💡 핵심 시사점</h3><ul>';
-  html += '<li><b>'+best.label+'</b> 영역이 <b>'+best.avg+'점</b>으로 가장 높은 만족도를 기록했습니다. '
-    +(best.label==='프로그램'?'체험 프로그램 자체에 대한 학생들의 흥미와 관심이 매우 높음을 시사합니다.':
-      best.label==='안전관리'?'안전에 대한 체계적 관리가 참여자들에게 높은 신뢰를 주고 있습니다.':
-      '해당 영역의 운영 방식을 타 영역에도 적용하는 것을 검토해볼 필요가 있습니다.')+'</li>';
-  html += '<li><b>'+worst.label+'</b> 영역이 <b>'+worst.avg+'점</b>으로 상대적으로 낮아 우선 개선이 필요합니다. '
-    +(worst.label==='이동편의'?'버스 배차, 이동 동선, 대기 시간 등에 대한 구체적 개선 방안을 마련해야 합니다.':
-      '해당 영역에 대한 사전 준비와 현장 운영 프로세스 재검토가 권장됩니다.')+'</li>';
-  const overallAvg = (avgScores.reduce((a,b)=>a+b.avg,0)/avgScores.length).toFixed(1);
-  html += '<li>전체 평균 <b>'+overallAvg+'점</b>으로 '+(overallAvg>=4?'매우 우수한':'양호한')+' 수준이며, ';
-  html += '학생과 교사 간 인식 차이 분석을 통해 세부 개선점을 도출할 수 있습니다.</li>';
-  html += '</ul></div>';
+  html+='<div class="insight-card ic-primary"><h3>💡 핵심 시사점</h3><ul>';
+  html+='<li><b>'+best.label+'</b> 영역이 <b>'+best.avg+'점</b>으로 가장 높은 만족도를 기록했습니다. '+(best.label==='프로그램'?'체험 프로그램에 대한 참여자들의 흥미와 관심이 매우 높습니다.':'해당 영역의 운영 방식을 타 영역에도 적용하는 것을 검토할 필요가 있습니다.')+'</li>';
+  html+='<li><b>'+worst.label+'</b> 영역이 <b>'+worst.avg+'점</b>으로 상대적으로 낮아 우선 개선이 필요합니다.</li>';
+  html+='<li>전체 평균 <b>'+overallAvg+'점</b>으로 '+(overallAvg>=4?'매우 우수한':'양호한')+' 수준이며, 학생 '+students.length+'명과 교사 '+teachers.length+'명의 인식 차이 분석이 가능합니다.</li>';
+  if(teacherInsightHtml) html+=teacherInsightHtml;
+  if(kinderCount>0) html+='<li><b>유치원생 '+kinderCount+'명</b>이 참여하였으며, 유아 발달 수준에 맞는 체험 프로그램 구성이 효과적이었는지 별도 검토가 필요합니다.</li>';
+  html+='</ul></div>';
 
-  // 2. 강점 분석
-  html += '<div class="insight-card ic-success">';
-  html += '<h3>👍 강점 분석</h3><ul>';
-  if (posCounts.length>0) html += '<li>긍정 키워드 상위: '+posCounts.slice(0,3).map(x=>'<b>"'+x.word+'"('+x.count+'회)</b>').join(', ')+' — 학생들이 체험을 통해 긍정적 학습 경험을 형성하고 있습니다.</li>';
-  if (memories.length>0) html += '<li>기억에 남는 활동 TOP 응답: <b>"'+memories[0]+'"</b> 등 — 직접 관찰·체험 활동이 학생의 장기 기억 형성에 효과적임을 보여줍니다.</li>';
-  html += '<li>재참여 의향 평균 <b>'+avgScores[4].avg+'점</b>으로 '+(avgScores[4].avg>=4?'높은':'보통 수준의')+' 재방문 욕구가 확인되어, 체험학습의 교육적 가치가 학생들에게 잘 전달되고 있습니다.</li>';
-  html += '</ul></div>';
-
-  // 3. 개선 필요 사항
-  html += '<div class="insight-card ic-danger">';
-  html += '<h3>🔧 개선 필요 사항 (우선순위 순)</h3><ul>';
-  if (topImps.length>0) {
-    topImps.forEach((imp,i) => {
-      const suggestions = {
-        '버스':'버스 2대 운행 또는 시차 출발 방식 검토',
-        '이동':'이동 동선 최적화 및 중간 휴식 시간 확보',
-        '대기':'대기 시간 중 간단한 퀴즈·활동지 배포',
-        '점심':'알레르기·채식 옵션 사전 조사 및 메뉴 다양화',
-        '식사':'충분한 식사 시간 확보 (최소 40분 권장)',
-        '시간':'전체 일정 여유 확보 및 자유 탐색 시간 추가',
-        '화장실':'이동 경로 중 화장실 위치 사전 안내',
-        '안내':'체험 전 10분 오리엔테이션 영상 또는 안내서 배포',
-        '자료':'사전 학습 워크시트 제작·배포',
-        '그늘':'야외 활동 시 그늘막·텐트 사전 설치',
-        '더위':'냉각 용품(선풍기·얼음물) 준비',
-        '자유':'자유 탐색 시간 30분 이상 확보',
-        '프로그램':'학년별 난이도 차별화된 프로그램 구성',
-      };
-      html += '<li><b>['+('①②③④⑤')[i]+' '+imp[0]+']</b> 관련 의견 '+imp[1]+'건 → '+(suggestions[imp[0]]||'관련 사항 개선 필요')+'</li>';
-    });
-  } else {
-    html += '<li>구체적 개선 요청이 적어, 전반적으로 만족스러운 운영이었음을 시사합니다.</li>';
+  // 2. 강점
+  html+='<div class="insight-card ic-success"><h3>👍 강점 분석</h3><ul>';
+  if(posCounts.length>0) html+='<li>긍정 키워드 상위: '+posCounts.slice(0,3).map(x=>'<b>"'+x.word+'"('+x.count+'회)</b>').join(', ')+'</li>';
+  const memories=allResp.map(r=>r.answers.q6).filter(Boolean);
+  if(memories.length>0) html+='<li>기억에 남는 활동: <b>"'+memories[0]+'"</b> 등 — 직접 체험 활동이 학습 효과에 긍정적 영향을 미치고 있습니다.</li>';
+  html+='<li>재참여 의향 <b>'+avgScores[4].avg+'점</b>으로 체험학습의 교육적 가치가 잘 전달되고 있습니다.</li>';
+  if(teachers.length>0){
+    const tMemos=teachers.map(r=>r.answers.q6).filter(Boolean);
+    if(tMemos.length>0) html+='<li><b>인솔교사 의견</b>: "'+tMemos[0]+'"</li>';
   }
-  html += '</ul></div>';
+  html+='</ul></div>';
 
-  // 4. 교육과정 연계 제안
-  html += '<div class="insight-card ic-warning">';
-  html += '<h3>📚 교육과정 연계 제안</h3><ul>';
-  html += '<li><b>[과학]</b> "생태계와 환경" 단원 → 체험 중 관찰한 동·식물 보고서 작성 활동으로 연계하면 탐구 능력 향상에 효과적입니다.</li>';
-  html += '<li><b>[국어]</b> "경험을 글로 표현하기" 성취기준 → 체험 후 감상문 또는 기행문 쓰기 과제와 통합 운영을 권장합니다.</li>';
-  html += '<li><b>[사회/도덕]</b> "공동체 의식" → 모둠별 협력 미션 수행 결과를 발표·공유하는 사후 활동으로 확장할 수 있습니다.</li>';
-  html += '<li><b>[미술]</b> 자연물 관찰 드로잉 또는 사진 촬영 → 체험 사진전·전시회 형태의 산출물 제작을 제안합니다.</li>';
-  html += '</ul></div>';
+  // 3. 개선
+  html+='<div class="insight-card ic-danger"><h3>🔧 개선 필요 사항 (우선순위 순)</h3><ul>';
+  const suggestions={'버스':'버스 2대 운행 또는 시차 출발 검토','이동':'이동 동선 최적화 및 중간 휴식 시간 확보','대기':'대기 시간 중 간단한 활동 프로그램 운영','점심':'알레르기·채식 옵션 사전 조사','식사':'충분한 식사 시간 확보','시간':'전체 일정 여유 확보','화장실':'이동 경로 중 화장실 위치 사전 안내','안내':'체험 전 오리엔테이션 자료 배포','자료':'사전 학습 워크시트 제작','그늘':'그늘막·텐트 사전 설치','자유':'자유 탐색 시간 확보','프로그램':'학년별 난이도 차별화','안전':'안전 매뉴얼 보완 및 인솔 인력 확충','인솔':'학생 수 대비 인솔 교사 비율 조정','인력':'보조 인력 추가 배치 검토'};
+  if(topImps.length>0){topImps.forEach((imp,i)=>{html+='<li><b>['+['①','②','③','④','⑤'][i]+' '+imp[0]+']</b> 관련 의견 '+imp[1]+'건 → '+(suggestions[imp[0]]||'관련 사항 개선 필요')+'</li>'})}
+  else html+='<li>구체적 개선 요청이 적어, 전반적으로 만족스러운 운영이었음을 시사합니다.</li>';
+  if(kinderCount>0) html+='<li><b>[유치원 참여]</b> 유아 안전 동선, 화장실 접근성, 간식 시간 등 유아 특성에 맞는 별도 운영 계획 수립을 권장합니다.</li>';
+  html+='</ul></div>';
 
-  document.getElementById('reportContent').innerHTML = html;
+  // 4. 교육과정 연계
+  html+='<div class="insight-card ic-warning"><h3>📚 교육과정 연계 제안</h3><ul>';
+  const hasKinder=(survey.targetGrades||[]).includes('K');
+  if(hasKinder) html+='<li><b>[누리과정-자연탐구]</b> "주변 환경에 관심 갖기" → 체험 중 관찰한 자연물 그리기, 이야기 나누기 활동으로 연계</li>';
+  html+='<li><b>[과학]</b> "생태계와 환경" 단원 → 체험 중 관찰 보고서 작성 활동 연계</li>';
+  html+='<li><b>[국어]</b> "경험을 글로 표현하기" → 체험 후 감상문·기행문 쓰기 과제 통합 운영</li>';
+  html+='<li><b>[사회/도덕]</b> "공동체 의식" → 모둠별 협력 미션 수행 결과 발표·공유 활동</li>';
+  html+='</ul></div>';
+
+  document.getElementById('reportContent').innerHTML=html;
   showPage('report');
 }
 
-function copyReport() {
-  const el = document.getElementById('reportContent');
-  const text = el.innerText;
-  navigator.clipboard.writeText(text).then(() => showToast('리포트가 클립보드에 복사되었습니다!'));
-}
+function copyReport(){navigator.clipboard.writeText(document.getElementById('reportContent').innerText).then(()=>showToast('리포트가 복사되었습니다!'))}
+function printReport(){window.print()}
 
-function printReport() { window.print(); }
-
-/* ═══════════════════════════════════════════════════════════ */
-/*  CSV 내보내기                                               */
-/* ═══════════════════════════════════════════════════════════ */
-function exportCSV() {
-  const allResp = getResponses().filter(r=>r.surveyId===APP.currentSurveyId);
-  if (!allResp.length) return;
-
-  const BOM = '\uFEFF';
-  let csv = BOM + '이름,역할,학년,프로그램,안전관리,이동편의,교육효과,재참여,기억에남는활동,개선의견,응답시간(초),응답일시\n';
-  allResp.forEach(r => {
-    const a = r.answers;
-    csv += [r.name, r.role==='teacher'?'교사':'학생', r.grade||'',
-      a.q1||'',a.q2||'',a.q3||'',a.q4||'',a.q5||'',
-      '"'+(a.q6||'').replace(/"/g,'""')+'"','"'+(a.q7||'').replace(/"/g,'""')+'"',
-      r.completionSec, r.submittedAt].join(',')+'\n';
+/* ═══ CSV 내보내기 ═══ */
+function exportCSV(){
+  const allResp=getResponses().filter(r=>r.surveyId===APP.currentSurveyId);
+  if(!allResp.length)return;
+  const BOM='\uFEFF';
+  let csv=BOM+'이름,역할,학년,프로그램,안전관리,이동편의,교육효과,재참여,교육연계(교사),학생참여(교사),기관협조(교사),기억활동,개선의견,응답시간(초),응답일시\n';
+  allResp.forEach(r=>{
+    const a=r.answers;
+    const gradeLbl=r.grade==='K'?'유치원':(r.grade||'');
+    csv+=[r.name,r.role==='teacher'?'인솔교사':'학생',gradeLbl,a.q1||'',a.q2||'',a.q3||'',a.q4||'',a.q5||'',a.tq1||'',a.tq2||'',a.tq3||'','"'+(a.q6||'').replace(/"/g,'""')+'"','"'+(a.q7||'').replace(/"/g,'""')+'"',r.completionSec,r.submittedAt].join(',')+'\n';
   });
-
-  const blob = new Blob([csv], {type:'text/csv;charset=utf-8'});
-  const url = URL.createObjectURL(blob);
-  const a = document.createElement('a');
-  a.href=url; a.download='체험학습_응답_'+new Date().toISOString().slice(0,10)+'.csv';
-  a.click(); URL.revokeObjectURL(url);
+  const blob=new Blob([csv],{type:'text/csv;charset=utf-8'});
+  const url=URL.createObjectURL(blob);
+  const a=document.createElement('a');
+  a.href=url;a.download='체험학습_응답_'+new Date().toISOString().slice(0,10)+'.csv';
+  a.click();URL.revokeObjectURL(url);
   showToast('CSV 파일이 다운로드됩니다');
 }
 
-/* ═══════════════════════════════════════════════════════════ */
-/*  유틸리티                                                   */
-/* ═══════════════════════════════════════════════════════════ */
-function showToast(msg) {
-  const el = document.createElement('div');
-  el.className='toast'; el.textContent=msg;
-  document.body.appendChild(el);
-  setTimeout(()=>el.remove(), 2500);
-}
+/* ═══ 유틸 ═══ */
+function showToast(msg){const el=document.createElement('div');el.className='toast';el.textContent=msg;document.body.appendChild(el);setTimeout(()=>el.remove(),2500)}
 
-/* ═══════════════════════════════════════════════════════════ */
-/*  초기화                                                     */
-/* ═══════════════════════════════════════════════════════════ */
-window.onload = function() {
+/* ═══ 초기화 ═══ */
+window.onload=function(){
   renderGrades();
-  // 이전 로그인 복원
-  const saved = getData('currentUser', null);
-  if (saved) { APP.user = saved; goToList(); }
+  const saved=getData('currentUser',null);
+  if(saved){APP.user=saved;goToList()}
 };
 </script>
 </body>
